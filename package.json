@@ -5,6 +5,8 @@
   "repository": "git@github.com:Yixi/outliner.git",
   "author": "Yixi <lyh1112@gmail.com>",
   "dependencies": {
+    "mobx": "^5.5.2",
+    "mobx-react": "^5.3.6",
     "react": "^16.6.0",
     "react-dom": "^16.6.0"
   },

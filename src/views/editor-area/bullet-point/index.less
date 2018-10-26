@@ -1,0 +1,52 @@
+@action-width: 25px;
+
+.bullet-point {
+  position: relative;
+  padding: 2px 0 0;
+  z-index: 1;
+  font-size: 16px;
+
+  &-action {
+    width: @action-width;
+    height: 20px;
+    float: left;
+    color: #333;
+    position: relative;
+    z-index: 5;
+    padding-top: 3px;
+
+    &-handle {
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      display: inline-block;
+      float: left;
+      text-align: center;
+      font-size: 16px;
+      border-radius: 100%;
+      &::after {
+        font-family: Arial;
+        font-size: 24px;
+        content: "•";
+        color: rgba(0, 0, 0, .6)
+      }
+    }
+
+  }
+
+  &-content {
+    position: relative;
+    margin-left: @action-width;
+    z-index: 5;
+    padding-top: 2px;
+  }
+
+  &-children {
+    margin-top: 2px;
+    margin-left: 10px;
+    padding-left: 20px;
+    position: relative;
+    z-index: 5;
+    border-left: 1px solid #eee;
+  }
+}
