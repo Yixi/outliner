@@ -1,28 +1,37 @@
 {
-    "extends": ["tslint:recommended", "tslint-react"],
-    "rules": {
-        "jsx-no-multiline-js": false,
-        "jsx-alignment": false,
-        "semicolon": [
-            true,
-            "never"
-        ],
-        "quotemark": [
-            true,
-            "single",
-            "jsx-double",
-            "avoid-escape"
-        ],
-        "ordered-imports": [
-            false
-        ],
-        "jsx-boolean-value": [
-            false
-        ],
-        "member-access": [true, "no-public"],
-        "no-var-requires": false,
-        "no-console": false,
-        "object-literal-sort-keys": false,
-        "whitespace": [true, "check-module"]
-    }
+  "extends": [
+    "tslint:recommended",
+    "tslint-react"
+  ],
+  "rules": {
+    "jsx-no-multiline-js": false,
+    "jsx-alignment": false,
+    "semicolon": [
+      true,
+      "never"
+    ],
+    "quotemark": [
+      true,
+      "single",
+      "jsx-double",
+      "avoid-escape"
+    ],
+    "ordered-imports": [
+      false
+    ],
+    "jsx-boolean-value": [
+      false
+    ],
+    "member-access": [
+      true,
+      "no-public"
+    ],
+    "no-var-requires": false,
+    "no-console": false,
+    "object-literal-sort-keys": false,
+    "whitespace": [
+      true,
+      "check-module"
+    ]
+  }
 }
