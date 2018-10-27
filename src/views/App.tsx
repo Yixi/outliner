@@ -1,13 +1,13 @@
 import * as React from 'react'
 import HeaderBar from '@root/views/header'
-import EditorArea from '@root/views/editor-area'
+import Index from '@root/views/editor-area/index'
 
 export default class App extends React.PureComponent {
   render() {
     return (
       <div>
         <HeaderBar/>
-        <EditorArea/>
+        <Index/>
       </div>
     )
   }
