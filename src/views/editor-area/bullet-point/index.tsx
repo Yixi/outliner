@@ -35,6 +35,7 @@ export default class BulletPoint extends React.Component<IProps> {
   }
 
   render() {
+    console.log('render', this.props.bulletPoint)
     return (
       <div className="bullet-point">
         <div className="bullet-point-action">

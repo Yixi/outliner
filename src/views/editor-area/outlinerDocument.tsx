@@ -12,7 +12,6 @@ interface IProps {
 export default class OutlinerDocument extends React.Component<IProps> {
 
   render() {
-    console.log(this.props.data)
     return (
       <div>
         {this.props.data.tree.map(

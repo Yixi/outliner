@@ -2,6 +2,7 @@ import * as React from 'react'
 import { ContentState, Editor as DraftEditor, EditorState } from 'draft-js'
 import { DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBinding'
 import { COMMAND } from '@root/constant/commands'
+import { observer } from 'mobx-react'
 
 interface IProps {
   content?: string
@@ -10,16 +11,33 @@ interface IProps {
 
 interface IState {
   editorState: EditorState
+  prevPropsContent: string  // TODO: use for trigger new content , need find a better way
 }
 
+@observer
 export default class Editor extends React.Component<IProps, IState> {
 
   static defaultProps = {
     content: '',
   }
 
+  static getDerivedStateFromProps(props: IProps, state: IState) {
+    if (props.content !== state.prevPropsContent) {
+      return {
+        editorState: EditorState.push(
+          state.editorState,
+          ContentState.createFromText(props.content),
+          'apply-entity',
+        ),
+        prevPropsContent: props.content,
+      }
+    }
+    return null
+  }
+
   state: IState = {
     editorState: EditorState.createWithContent(ContentState.createFromText(this.props.content)),
+    prevPropsContent: this.props.content,
   }
 
   onChange = (editorState: EditorState) => {

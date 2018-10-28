@@ -28,6 +28,7 @@ export class Data {
   }
 
   @action processLog = (log: IActionLog) => {
+
     const processMap: { [key: string]: (log: IActionLog) => void } = {
       [ACTION_TYPE.CREATE]: this.processCreateLog,
       [ACTION_TYPE.EDIT]: this.processEditLog,
@@ -57,16 +58,19 @@ export class Data {
 
   private processCreateLog = (log: IActionLog) => {
     const newBulletPoint = cloneDeep(BULLET_POINT_TEMP)
-    const parentChilren = this.getChildrenById(log.data.parentId)
+    const parentChildren = this.getChildrenById(log.data.parentId)
 
     merge(newBulletPoint, log.data)
 
-    console.log(newBulletPoint)
+    parentChildren.splice(log.data.index, 0, newBulletPoint)
+
+    this.treeHash[newBulletPoint.id] = parentChildren[log.data.index]
 
   }
 
   private processEditLog = (log: IActionLog) => {
-
+    const bulletPoint = this.treeHash[log.data.id]
+    merge(bulletPoint, log.data)
   }
 
 }
