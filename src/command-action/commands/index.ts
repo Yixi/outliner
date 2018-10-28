@@ -1,10 +1,11 @@
 import { COMMAND } from '@root/constant/commands'
 import { generateCreateAction } from '@root/command-action/commands/add'
-import { IActionCommand } from '@root/command-action/buildAction'
-import { EditorState } from 'draft-js'
+import { IActionBuildParams, IActionCommand } from '@root/command-action/buildAction'
+import { generateExpandAction } from '@root/command-action/commands/expand'
 
 export const actionGenerate: {
-  [key: string]: (editorState: EditorState, currentId: string, parentId: string, index: number) => IActionCommand,
+  [key: string]: ({editorState, currentId, parentId, index, expand}: IActionBuildParams) => IActionCommand,
 } = {
   [COMMAND.ADD]: generateCreateAction,
+  [COMMAND.EXPAND]: generateExpandAction,
 }

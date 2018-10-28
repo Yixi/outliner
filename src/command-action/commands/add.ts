@@ -3,11 +3,14 @@ import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
 import uuid = require('uuid')
 
 export const generateCreateAction = (
-  editorState: EditorState,
-  currentId: string,
-  parentId: string,
-  index: number,
-  ) => {
+  {
+    editorState, currentId, parentId, index,
+  }: {
+    editorState?: EditorState,
+    currentId: string,
+    parentId?: string,
+    index?: number,
+  }) => {
 
   const startOffset = editorState.getSelection().getStartOffset()
   const content = editorState.getCurrentContent().getPlainText()
@@ -18,7 +21,7 @@ export const generateCreateAction = (
 
   return [
     actionLog.generateLog(ACTION_TYPE.CREATE, {id: newId, parentId, index}),
-    actionLog.generateLog(ACTION_TYPE.EDIT, {id: newId, content: leftContent}, {content: ''} ),
+    actionLog.generateLog(ACTION_TYPE.EDIT, {id: newId, content: leftContent}, {content: ''}),
     actionLog.generateLog(ACTION_TYPE.EDIT, {id: currentId, content: rightContent}, {content}),
   ]
 

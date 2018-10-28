@@ -5,12 +5,15 @@ import { actionGenerate } from '@root/command-action/commands'
 
 export type IActionCommand = IActionLog[]
 
-export const buildAction = (
-  command: COMMAND,
-  editorState: EditorState,
+export interface IActionBuildParams {
   currentId: string,
+  editorState?: EditorState,
   parentId?: string,
   index?: number,
-) => {
-  return actionGenerate[command](editorState, currentId, parentId, index)
+  expand?: boolean,
+}
+
+export const buildAction = (
+  {command, editorState, currentId, parentId, index, expand}: { command: COMMAND } & IActionBuildParams) => {
+  return actionGenerate[command]({editorState, currentId, index, parentId, expand})
 }

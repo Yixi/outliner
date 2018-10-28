@@ -24,11 +24,33 @@
       text-align: center;
       font-size: 16px;
       border-radius: 100%;
+      cursor: pointer;
+      font-family: Arial;
+
+      &:hover {
+        background: #c1c1c1;
+        color: #fff;
+      }
+
       &::after {
-        font-family: Arial;
         font-size: 24px;
         content: "•";
-        color: rgba(0, 0, 0, .6)
+        color: rgba(0, 0, 0, .6);
+        display: inline-block;
+      }
+
+      &-expand {
+        &::after {
+          content: "－";
+          font-size: 14px;
+        }
+      }
+
+      &-collapse {
+        &::after {
+          font-size: 18px;
+          content: "+";
+        }
       }
     }
 

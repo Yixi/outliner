@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Data } from '@root/store/data/index'
+import { Data } from '@root/store/data'
 import BulletPoint from '@root/views/editor-area/bullet-point'
 
 interface IProps {

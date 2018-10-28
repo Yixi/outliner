@@ -10,6 +10,7 @@ interface IActionDataMeta {
   parentId?: string,
   index?: number,
   content?: string,
+  expand?: boolean
 }
 
 export interface IActionLog {
@@ -43,7 +44,7 @@ class Log {
     type: ACTION_TYPE,
     currentData: IActionDataMeta,
     prevData?: IActionDataMeta,
-  ) {
+  ): IActionLog {
     const logCommand: { [key: string]: (currentData: IActionDataMeta, prevData?: IActionDataMeta) => IActionLog} = {
       [ACTION_TYPE.CREATE]: Log.generateCreateLog,
       [ACTION_TYPE.EDIT]: Log.generateEditLog,

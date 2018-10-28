@@ -6,6 +6,7 @@ export interface IBulletPoint {
   id: string,
   content: string,
   parentId: string,
+  expand: boolean,
   children: IBulletPoint[]
 }
 
@@ -14,6 +15,7 @@ const BULLET_POINT_TEMP: IBulletPoint = {
   content: '',
   parentId: '',
   children: [],
+  expand: true,
 }
 
 export class Data {

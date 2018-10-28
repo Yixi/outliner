@@ -5,6 +5,7 @@
   "repository": "git@github.com:Yixi/outliner.git",
   "author": "Yixi <lyh1112@gmail.com>",
   "dependencies": {
+    "classnames": "^2.2.6",
     "dayjs": "^1.7.7",
     "draft-js": "^0.10.5",
     "lodash-es": "^4.17.11",
@@ -19,6 +20,7 @@
     "start": "webpack-dev-server --open --config webpack/webpack.dev.config.js --progress"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.6",
     "@types/draft-js": "^0.10.26",
     "@types/lodash-es": "^4.17.1",
     "@types/react": "^16.4.18",
