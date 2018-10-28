@@ -20,7 +20,16 @@ export default class BulletPoint extends React.Component<IProps> {
 
   handleContentEditorCommand = (command: COMMAND, editorState: EditorState) => {
     const {bulletPoint, index, parentId} = this.props
-    actionProcess(buildAction({command, editorState, currentId: bulletPoint.id, parentId, index}))
+    actionProcess(buildAction({
+      command,
+      editorState,
+      currentId:
+      bulletPoint.id,
+      parentId,
+      index,
+      expand: bulletPoint.expand,
+      haveChildren: bulletPoint.children.length > 0,
+    }))
   }
 
   handleExpandCommand = () => {

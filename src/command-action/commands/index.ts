@@ -4,7 +4,7 @@ import { IActionBuildParams, IActionCommand } from '@root/command-action/buildAc
 import { generateExpandAction } from '@root/command-action/commands/expand'
 
 export const actionGenerate: {
-  [key: string]: ({editorState, currentId, parentId, index, expand}: IActionBuildParams) => IActionCommand,
+  [key: string]: (buildParams: IActionBuildParams) => IActionCommand,
 } = {
   [COMMAND.ADD]: generateCreateAction,
   [COMMAND.EXPAND]: generateExpandAction,

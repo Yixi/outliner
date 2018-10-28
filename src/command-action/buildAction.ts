@@ -11,9 +11,9 @@ export interface IActionBuildParams {
   parentId?: string,
   index?: number,
   expand?: boolean,
+  haveChildren?: boolean,
 }
 
-export const buildAction = (
-  {command, editorState, currentId, parentId, index, expand}: { command: COMMAND } & IActionBuildParams) => {
-  return actionGenerate[command]({editorState, currentId, index, parentId, expand})
+export const buildAction = (buildParams: { command: COMMAND } & IActionBuildParams) => {
+  return actionGenerate[buildParams.command]({...buildParams})
 }

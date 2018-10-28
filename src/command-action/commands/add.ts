@@ -4,12 +4,14 @@ import uuid = require('uuid')
 
 export const generateCreateAction = (
   {
-    editorState, currentId, parentId, index,
+    editorState, currentId, parentId, index, expand, haveChildren,
   }: {
     editorState?: EditorState,
     currentId: string,
-    parentId?: string,
-    index?: number,
+    parentId: string,
+    index: number,
+    expand: boolean,
+    haveChildren: boolean,
   }) => {
 
   const startOffset = editorState.getSelection().getStartOffset()
@@ -19,10 +21,26 @@ export const generateCreateAction = (
 
   const newId = uuid()
 
-  return [
-    actionLog.generateLog(ACTION_TYPE.CREATE, {id: newId, parentId, index}),
-    actionLog.generateLog(ACTION_TYPE.EDIT, {id: newId, content: leftContent}, {content: ''}),
-    actionLog.generateLog(ACTION_TYPE.EDIT, {id: currentId, content: rightContent}, {content}),
-  ]
+  const isCase1 = haveChildren && rightContent.length === 0 && expand
+  const isCase2 = rightContent.length === 0 && (!haveChildren || (haveChildren && !expand))
+
+  if (isCase1) {
+    console.log('case 1')
+    return [
+      actionLog.generateLog(ACTION_TYPE.CREATE, {id: newId, parentId: currentId, index: 0}),
+    ]
+
+  } else if (isCase2) {
+    return [
+      actionLog.generateLog(ACTION_TYPE.CREATE, {id: newId, parentId, index: index + 1}),
+    ]
+  } else {
+
+    return [
+      actionLog.generateLog(ACTION_TYPE.CREATE, {id: newId, parentId, index}),
+      actionLog.generateLog(ACTION_TYPE.EDIT, {id: newId, content: leftContent}, {content: ''}),
+      actionLog.generateLog(ACTION_TYPE.EDIT, {id: currentId, content: rightContent}, {content}),
+    ]
+  }
 
 }
