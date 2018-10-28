@@ -17,8 +17,9 @@
   },
   "scripts": {
     "dev": "yarn start",
-    "start": "webpack-dev-server --open --config webpack/webpack.dev.config.js --progress",
-    "build": "webpack --config webpack/webpack.prod.config.js"
+    "start": "webpack-dev-server --open --config build/webpack.dev.config.js --progress",
+    "build": "webpack --config build/webpack.prod.config.js",
+    "deploy:gh-page": "yarn build && node ./build/gh-pages-deploy.js"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.6",
@@ -31,6 +32,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
     "fork-ts-checker-webpack-plugin": "^0.4.12",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
