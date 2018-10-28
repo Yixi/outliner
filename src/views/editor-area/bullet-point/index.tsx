@@ -7,6 +7,7 @@ import Editor from '@root/components/editor'
 import { EditorState } from 'draft-js'
 import { COMMAND } from '@root/constant/commands'
 import { buildAction } from '@root/command-action/buildAction'
+import { actionProcess } from '@root/action-log/actionProcess'
 
 interface IProps {
   bulletPoint: IBulletPoint,
@@ -19,8 +20,7 @@ export default class BulletPoint extends React.Component<IProps> {
 
   handleContentEditorCommand = (command: COMMAND, editorState: EditorState) => {
     const {bulletPoint, index, parentId} = this.props
-    console.log(command, editorState)
-    console.log(buildAction(command, editorState, bulletPoint.id, parentId, index))
+    actionProcess(buildAction(command, editorState, bulletPoint.id, parentId, index))
   }
 
   renderChild = (bulletPoint: IBulletPoint, index: number) => {

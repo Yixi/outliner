@@ -1,0 +1,8 @@
+import { IActionCommand } from '@root/command-action/buildAction'
+import data from '../store/data'
+
+export const actionProcess = (actionLog: IActionCommand) => {
+  console.log(actionLog)
+
+  actionLog.forEach(data.processLog)
+}
