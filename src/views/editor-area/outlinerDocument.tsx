@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Data } from '@root/store/data'
+import { Data } from '@root/store/data/index'
 import BulletPoint from '@root/views/editor-area/bullet-point'
 
 interface IProps {
@@ -15,7 +15,9 @@ export default class OutlinerDocument extends React.Component<IProps> {
     console.log(this.props.data)
     return (
       <div>
-        {this.props.data.tree.map((bulletPoint) => <BulletPoint key={bulletPoint.id} bulletPoint={bulletPoint}/>)}
+        {this.props.data.tree.map(
+          (bulletPoint, index) => <BulletPoint key={bulletPoint.id} bulletPoint={bulletPoint} index={index}/>,
+        )}
       </div>
     )
   }

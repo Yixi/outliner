@@ -1,4 +1,4 @@
-import data from './data'
+import data from './data/index'
 
 export default {
   data,

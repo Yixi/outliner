@@ -1,9 +1,6 @@
 import { KEY_CODE } from '@root/constant/keyCode'
 import { getDefaultKeyBinding } from 'draft-js'
-
-export enum COMMAND {
-  ADD = 'ADD',
-}
+import { COMMAND } from '@root/constant/commands'
 
 export enum DRAFT_HANDLE_VALUE {
   HANDLED = 'handled',

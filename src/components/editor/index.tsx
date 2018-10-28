@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ContentState, Editor as DraftEditor, EditorState } from 'draft-js'
-import { COMMAND, DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBinding'
+import { DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBinding'
+import { COMMAND } from '@root/constant/commands'
 
 interface IProps {
   content?: string

@@ -4,18 +4,34 @@ import { observer } from 'mobx-react'
 
 import './index.less'
 import Editor from '@root/components/editor'
-import { COMMAND } from '@root/components/editor/keyBinding'
 import { EditorState } from 'draft-js'
+import { COMMAND } from '@root/constant/commands'
+import { buildAction } from '@root/command-action/buildAction'
 
 interface IProps {
-  bulletPoint: IBulletPoint
+  bulletPoint: IBulletPoint,
+  index: number,
+  parentId?: string
 }
 
 @observer
 export default class BulletPoint extends React.Component<IProps> {
 
   handleContentEditorCommand = (command: COMMAND, editorState: EditorState) => {
+    const {bulletPoint, index, parentId} = this.props
     console.log(command, editorState)
+    console.log(buildAction(command, editorState, bulletPoint.id, parentId, index))
+  }
+
+  renderChild = (bulletPoint: IBulletPoint, index: number) => {
+    return (
+      <BulletPoint
+        bulletPoint={bulletPoint}
+        key={bulletPoint.id}
+        index={index}
+        parentId={this.props.bulletPoint.id}
+      />
+    )
   }
 
   render() {
@@ -31,9 +47,7 @@ export default class BulletPoint extends React.Component<IProps> {
           />
         </div>
         <div className="bullet-point-children">
-          {this.props.bulletPoint.children.map(
-            (bulletPoint) => <BulletPoint bulletPoint={bulletPoint} key={bulletPoint.id}/>,
-          )}
+          {this.props.bulletPoint.children.map(this.renderChild)}
         </div>
       </div>
     )
