@@ -32,6 +32,7 @@ export const generateCreateAction = (
     ]
 
   } else if (isCase2) {
+    cursorMange.setNextCursor({editorId: newId})
     return [
       actionLog.generateLog(ACTION_TYPE.CREATE, {id: newId, parentId, index: index + 1}),
     ]

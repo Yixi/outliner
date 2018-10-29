@@ -3,7 +3,7 @@ import { ContentState, Editor as DraftEditor, EditorState } from 'draft-js'
 import { DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBinding'
 import { COMMAND } from '@root/constant/commands'
 import { observer } from 'mobx-react'
-import cursorMange from '@root/tools/cursorManage'
+import cursorMange, { ICursorInfo } from '@root/tools/cursorManage'
 
 interface IProps {
   content?: string
@@ -18,7 +18,6 @@ interface IState {
 
 @observer
 export default class Editor extends React.Component<IProps, IState> {
-
   static defaultProps = {
     content: '',
   }
@@ -37,13 +36,33 @@ export default class Editor extends React.Component<IProps, IState> {
     return null
   }
 
+  editorContentRef: DraftEditor
+
   state: IState = {
     editorState: EditorState.createWithContent(ContentState.createFromText(this.props.content)),
     prevPropsContent: this.props.content,
   }
 
+  componentDidMount() {
+    cursorMange.onChange(this.setCursor)
+    // init cursor if component mount
+    this.setCursor(cursorMange.getCursor())
+  }
+
+  setCursor = (cursor: ICursorInfo) => {
+    if (cursor.editorId === this.props.id) {
+      console.log(cursor)
+      this.editorContentRef.focus()
+      cursorMange.resetCursor()
+    }
+  }
+
   onChange = (editorState: EditorState) => {
     this.setState({editorState})
+  }
+
+  setEditorRef = (editor: DraftEditor) => {
+    this.editorContentRef = editor
   }
 
   handleKeyCommand = (command: COMMAND, editorState: EditorState) => {
@@ -66,6 +85,7 @@ export default class Editor extends React.Component<IProps, IState> {
           onChange={this.onChange}
           handleKeyCommand={this.handleKeyCommand}
           keyBindingFn={keyBinding}
+          ref={this.setEditorRef}
         />
       </div>
     )

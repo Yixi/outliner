@@ -1,4 +1,4 @@
-interface ICursorInfo {
+export interface ICursorInfo {
   editorId: string,
   offset?: number,
 }
@@ -26,6 +26,14 @@ class CursorManage {
     this.listeners.forEach((listener) => {
       listener(this.cursor)
     })
+  }
+
+  getCursor() {
+    return this.cursor
+  }
+
+  resetCursor() {
+    this.cursor = {editorId: null, offset: 0}
   }
 
 }
