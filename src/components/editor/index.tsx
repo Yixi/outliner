@@ -3,9 +3,11 @@ import { ContentState, Editor as DraftEditor, EditorState } from 'draft-js'
 import { DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBinding'
 import { COMMAND } from '@root/constant/commands'
 import { observer } from 'mobx-react'
+import cursorMange from '@root/tools/cursorManage'
 
 interface IProps {
   content?: string
+  id: string
   onCommandEvent: (command: COMMAND, editorState: EditorState) => void
 }
 

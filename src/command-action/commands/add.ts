@@ -1,6 +1,7 @@
 import { EditorState } from 'draft-js'
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
 import uuid = require('uuid')
+import cursorMange from '@root/tools/cursorManage'
 
 export const generateCreateAction = (
   {
@@ -25,7 +26,7 @@ export const generateCreateAction = (
   const isCase2 = rightContent.length === 0 && (!haveChildren || (haveChildren && !expand))
 
   if (isCase1) {
-    console.log('case 1')
+    cursorMange.setNextCursor({editorId: newId})
     return [
       actionLog.generateLog(ACTION_TYPE.CREATE, {id: newId, parentId: currentId, index: 0}),
     ]

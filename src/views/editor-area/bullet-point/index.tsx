@@ -8,6 +8,7 @@ import { COMMAND } from '@root/constant/commands'
 import { buildAction } from '@root/command-action/buildAction'
 import { actionProcess } from '@root/action-log/actionProcess'
 import classNames from 'classnames'
+import cursorMange from '@root/tools/cursorManage'
 
 interface IProps {
   bulletPoint: IBulletPoint,
@@ -30,6 +31,9 @@ export default class BulletPoint extends React.Component<IProps> {
       expand: bulletPoint.expand,
       haveChildren: bulletPoint.children.length > 0,
     }))
+
+    cursorMange.applyStackCursor()
+    console.log('apply')
   }
 
   handleExpandCommand = () => {
@@ -80,6 +84,7 @@ export default class BulletPoint extends React.Component<IProps> {
         {this.renderAction()}
         <div className="bullet-point-content">
           <Editor
+            id={bulletPoint.id}
             content={bulletPoint.content}
             onCommandEvent={this.handleContentEditorCommand}
           />
