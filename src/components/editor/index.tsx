@@ -5,7 +5,6 @@ import { COMMAND } from '@root/constant/commands'
 import { observer } from 'mobx-react'
 import cursorMange, { ICursorInfo } from '@root/tools/cursorManage'
 import { debounce } from 'lodash-es'
-import SelectionState = Draft.Model.ImmutableData.SelectionState
 
 interface IProps {
   content?: string
@@ -57,9 +56,8 @@ export default class Editor extends React.Component<IProps, IState> {
 
   setCursor = (cursor: ICursorInfo) => {
     if (cursor.editorId === this.props.id) {
-      console.log(cursor)
       this.editorContentRef.focus()
-      console.log(this.state.editorState.toJS())
+      // TODO: need fina a right way to set the cursor
       const selectionState = this.state.editorState.getSelection().merge({
         anchorOffset: cursor.offset,
         focusOffset: cursor.offset,
