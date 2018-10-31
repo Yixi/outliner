@@ -1,5 +1,8 @@
+import { SelectionState } from 'draft-js'
+
 export interface ICursorInfo {
   editorId: string,
+  selectionState?: SelectionState
   offset?: number,
 }
 
@@ -12,10 +15,17 @@ class CursorManage {
   private cursor: ICursorInfo = {
     editorId: null,
     offset: 0,
+    selectionState: null,
   }
 
   onChange(listener: ICursorListener) {
     this.listeners.push(listener)
+    let isListened = true
+    return () => {
+      if (!isListened) { return }
+      isListened = false
+      this.listeners.splice(this.listeners.indexOf(listener), 1)
+    }
   }
 
   setNextCursor(cursor: ICursorInfo) {

@@ -7,14 +7,14 @@ import cursorMange, { ICursorInfo } from '@root/tools/cursorManage'
 import { debounce } from 'lodash-es'
 
 interface IProps {
-  content?: string
+  contentState?: ContentState
   id: string
   onCommandEvent: (command: COMMAND, editorState: EditorState) => void
 }
 
 interface IState {
   editorState: EditorState
-  prevPropsContent: string  // TODO: use for trigger new content , need find a better way
+  prevPropsContentContentState: ContentState  // TODO: use for trigger new content , need find a better way
 }
 
 @observer
@@ -24,59 +24,59 @@ export default class Editor extends React.Component<IProps, IState> {
   }
 
   static getDerivedStateFromProps(props: IProps, state: IState) {
-    if (props.content !== state.prevPropsContent) {
+    if (props.contentState !== state.prevPropsContentContentState) {
       return {
-        editorState: EditorState.push(
-          state.editorState,
-          ContentState.createFromText(props.content),
-          'apply-entity',
-        ),
-        prevPropsContent: props.content,
+        editorState: EditorState.push(state.editorState, props.contentState, 'change-block-data'),
+        prevPropsContentContentState: props.contentState,
       }
     }
     return null
   }
 
   editorContentRef: DraftEditor
+  destroyCursorListener: () => void
 
   state: IState = {
-    editorState: EditorState.createWithContent(ContentState.createFromText(this.props.content)),
-    prevPropsContent: this.props.content,
+    editorState: EditorState.createWithContent(this.props.contentState),
+    prevPropsContentContentState: this.props.contentState,
   }
 
-  debounceContentChange = debounce((content: string) => {
-    this.syncContent(content)
+  debounceContentChange = debounce((editorState: EditorState) => {
+    this.syncContent(editorState)
   }, 1000)
 
   componentDidMount() {
-    cursorMange.onChange(this.setCursor)
+    this.destroyCursorListener = cursorMange.onChange(this.setCursor)
     // init cursor if component mount
     this.setCursor(cursorMange.getCursor())
   }
 
+  componentWillUnmount() {
+    this.destroyCursorListener()
+  }
+
   setCursor = (cursor: ICursorInfo) => {
     if (cursor.editorId === this.props.id) {
+      console.log(this.editorContentRef)
       this.editorContentRef.focus()
       // TODO: need fina a right way to set the cursor
-      const selectionState = this.state.editorState.getSelection().merge({
-        anchorOffset: cursor.offset,
-        focusOffset: cursor.offset,
-      }) as SelectionState
-      this.setState({
-        editorState: EditorState.forceSelection(this.state.editorState, selectionState),
-      })
+      if (cursor.selectionState) {
+        this.setState({
+          editorState: EditorState.forceSelection(this.state.editorState, cursor.selectionState),
+        })
+      }
       cursorMange.resetCursor()
     }
   }
 
   onChange = (editorState: EditorState) => {
     this.setState({editorState}, () => {
-      this.debounceContentChange(editorState.getCurrentContent().getPlainText())
+      this.debounceContentChange(editorState)
     })
   }
 
-  syncContent = (content: string) => {
-    if (this.state.prevPropsContent !== content) {
+  syncContent = (editorState: EditorState) => {
+    if (this.state.prevPropsContentContentState !== editorState.getCurrentContent()) {
       this.props.onCommandEvent(COMMAND.EDIT, this.state.editorState)
     }
   }

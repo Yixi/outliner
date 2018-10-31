@@ -84,7 +84,7 @@ export default class BulletPoint extends React.Component<IProps> {
         <div className="bullet-point-content">
           <Editor
             id={bulletPoint.id}
-            content={bulletPoint.content}
+            contentState={bulletPoint.content}
             onCommandEvent={this.handleContentEditorCommand}
           />
         </div>

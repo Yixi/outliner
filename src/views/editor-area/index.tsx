@@ -3,6 +3,7 @@ import OutlinerDocument from '@root/views/editor-area/outlinerDocument'
 import { Data, IBulletPoint } from '@root/store/data'
 import { inject } from 'mobx-react'
 import './index.less'
+import { ContentState, convertFromHTML, EditorState } from 'draft-js'
 
 interface IProps {
   data?: Data
@@ -11,34 +12,35 @@ interface IProps {
 const mockData: IBulletPoint[] = [
   {
     id: '1',
-    content: 'content 1',
+    content:
+      ContentState.createFromText('content 1'),
     children: [],
     parentId: null,
     expand: true,
   },
   {
     id: '2',
-    content: 'content 2 ',
+    content: ContentState.createFromText('content 2'),
     parentId: null,
     expand: true,
     children: [
       {
         id: '2-1',
-        content: 'content 2-1',
+        content: ContentState.createFromText('content 2-1'),
         children: [],
         parentId: '2',
         expand: true,
       },
       {
         id: '2-2',
-        content: 'content 2-2',
+        content: (ContentState.createFromText('content 2-2')),
         children: [],
         parentId: '2',
         expand: true,
       },
       {
         id: '2-3',
-        content: 'content 2-3',
+        content: (ContentState.createFromText('content 2-3')),
         children: [],
         parentId: '2',
         expand: true,
@@ -47,7 +49,7 @@ const mockData: IBulletPoint[] = [
   },
   {
     id: '3',
-    content: 'content 3',
+    content: (ContentState.createFromText('content 3')),
     children: [],
     parentId: null,
     expand: true,

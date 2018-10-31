@@ -1,10 +1,11 @@
 import { action, observable } from 'mobx'
 import { ACTION_TYPE, IActionLog } from '@root/command-action/actionLog'
-import { cloneDeep, merge } from 'lodash-es'
+import { cloneDeep } from 'lodash-es'
+import { ContentState } from 'draft-js'
 
 export interface IBulletPoint {
   id: string,
-  content: string,
+  content: ContentState,
   parentId: string,
   expand: boolean,
   children: IBulletPoint[]
@@ -12,7 +13,7 @@ export interface IBulletPoint {
 
 const BULLET_POINT_TEMP: IBulletPoint = {
   id: '',
-  content: '',
+  content: ContentState.createFromText(''),
   parentId: '',
   children: [],
   expand: true,
@@ -42,7 +43,6 @@ export class Data {
 
   private buildHash = (tree: IBulletPoint[]) => {
     tree.forEach((bulletPoint) => {
-
       this.treeHash[bulletPoint.id] = bulletPoint
 
       if (bulletPoint.children.length > 0) {
@@ -62,7 +62,7 @@ export class Data {
     const newBulletPoint = cloneDeep(BULLET_POINT_TEMP)
     const parentChildren = this.getChildrenById(log.data.parentId)
 
-    merge(newBulletPoint, log.data)
+    Object.assign(newBulletPoint, log.data)
 
     parentChildren.splice(log.data.index, 0, newBulletPoint)
 
@@ -72,7 +72,7 @@ export class Data {
 
   private processEditLog = (log: IActionLog) => {
     const bulletPoint = this.treeHash[log.data.id]
-    merge(bulletPoint, log.data)
+    Object.assign(bulletPoint, log.data)
   }
 
 }

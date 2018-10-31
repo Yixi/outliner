@@ -11,7 +11,7 @@ export const generateEditAction = (
 
   cursorMange.setNextCursor({
     editorId: currentId,
-    offset: editorState.getSelection().getStartOffset(),
+    selectionState: editorState.getSelection(),
   })
 
   return [
@@ -19,7 +19,7 @@ export const generateEditAction = (
       ACTION_TYPE.EDIT,
       {
         id: currentId,
-        content: editorState.getCurrentContent().getPlainText(),
+        content: editorState.getCurrentContent(),
       },
     ),
   ]

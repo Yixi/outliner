@@ -1,7 +1,8 @@
-import { EditorState } from 'draft-js'
+import { ContentState, convertToRaw, EditorState, Modifier } from 'draft-js'
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
 import uuid = require('uuid')
 import cursorMange from '@root/tools/cursorManage'
+import { chunk, indexOf } from 'lodash-es'
 
 export const generateCreateAction = (
   {
@@ -15,15 +16,20 @@ export const generateCreateAction = (
     haveChildren: boolean,
   }) => {
 
-  const startOffset = editorState.getSelection().getStartOffset()
-  const content = editorState.getCurrentContent().getPlainText()
-  const leftContent = content.substr(0, startOffset)
-  const rightContent = content.substr(startOffset, content.length)
-
+  const currentContentState = editorState.getCurrentContent()
+  const splitContent = Modifier.splitBlock(currentContentState, editorState.getSelection())
+  const blockArray = splitContent.getBlocksAsArray()
+  const selectBlockStartIndex = indexOf(
+    blockArray, splitContent.getBlockForKey(splitContent.getSelectionBefore().getStartKey()))
+  const leftContentState = ContentState.createFromBlockArray(blockArray.slice(0, selectBlockStartIndex + 1))
+  const rightContentState =ContentState.createFromBlockArray(blockArray.slice(selectBlockStartIndex + 1))
   const newId = uuid()
 
-  const isCase1 = haveChildren && rightContent.length === 0 && expand
-  const isCase2 = rightContent.length === 0 && (!haveChildren || (haveChildren && !expand))
+  console.log(leftContentState.getPlainText())
+  console.log(rightContentState.getPlainText())
+
+  const isCase1 = haveChildren && rightContentState.getPlainText().length === 0 && expand
+  const isCase2 = rightContentState.getPlainText().length === 0 && (!haveChildren || (haveChildren && !expand))
 
   if (isCase1) {
     cursorMange.setNextCursor({editorId: newId})
@@ -40,8 +46,12 @@ export const generateCreateAction = (
 
     return [
       actionLog.generateLog(ACTION_TYPE.CREATE, {id: newId, parentId, index}),
-      actionLog.generateLog(ACTION_TYPE.EDIT, {id: newId, content: leftContent}, {content: ''}),
-      actionLog.generateLog(ACTION_TYPE.EDIT, {id: currentId, content: rightContent}, {content}),
+      actionLog.generateLog(ACTION_TYPE.EDIT,
+        {id: newId, content: leftContentState},
+        {content: ContentState.createFromText('')}),
+      actionLog.generateLog(ACTION_TYPE.EDIT,
+        {id: currentId, content: rightContentState},
+        {content: currentContentState}),
     ]
   }
 

@@ -1,4 +1,5 @@
 import * as dayjs from 'dayjs'
+import { ContentState } from 'draft-js'
 
 export enum ACTION_TYPE {
   CREATE = 'CREATE',
@@ -9,7 +10,7 @@ interface IActionDataMeta {
   id?: string,
   parentId?: string,
   index?: number,
-  content?: string,
+  content?: ContentState,
   expand?: boolean
 }
 
