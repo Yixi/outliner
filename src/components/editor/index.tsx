@@ -106,6 +106,7 @@ export default class Editor extends React.Component<IProps, IState> {
           handleKeyCommand={this.handleKeyCommand}
           keyBindingFn={keyBinding}
           ref={this.setEditorRef}
+          onTab={keyBinding}
         />
       </div>
     )
