@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Draft, { ContentState, Editor as DraftEditor, EditorState, SelectionState } from 'draft-js'
+import { ContentState, Editor as DraftEditor, EditorState, SelectionState } from 'draft-js'
 import { DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBinding'
 import { COMMAND } from '@root/constant/commands'
 import { observer } from 'mobx-react'
@@ -97,6 +97,15 @@ export default class Editor extends React.Component<IProps, IState> {
     return DRAFT_HANDLE_VALUE.NOT_HANDLE
   }
 
+  handleTab = (event: React.KeyboardEvent) => {
+    event.preventDefault()
+    if (event.shiftKey) {
+      this.props.onCommandEvent(COMMAND.OUTDENT, this.state.editorState)
+    } else {
+      this.props.onCommandEvent(COMMAND.INDENT, this.state.editorState)
+    }
+  }
+
   render() {
     return (
       <div>
@@ -106,7 +115,7 @@ export default class Editor extends React.Component<IProps, IState> {
           handleKeyCommand={this.handleKeyCommand}
           keyBindingFn={keyBinding}
           ref={this.setEditorRef}
-          onTab={keyBinding}
+          onTab={this.handleTab}
         />
       </div>
     )

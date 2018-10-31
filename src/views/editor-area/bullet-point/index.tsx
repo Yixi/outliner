@@ -33,7 +33,6 @@ export default class BulletPoint extends React.Component<IProps> {
     }))
 
     cursorMange.applyStackCursor()
-    console.log('apply')
   }
 
   handleExpandCommand = () => {
