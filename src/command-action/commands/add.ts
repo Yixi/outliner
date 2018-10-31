@@ -25,9 +25,6 @@ export const generateCreateAction = (
   const rightContentState =ContentState.createFromBlockArray(blockArray.slice(selectBlockStartIndex + 1))
   const newId = uuid()
 
-  console.log(leftContentState.getPlainText())
-  console.log(rightContentState.getPlainText())
-
   const isCase1 = haveChildren && rightContentState.getPlainText().length === 0 && expand
   const isCase2 = rightContentState.getPlainText().length === 0 && (!haveChildren || (haveChildren && !expand))
 
