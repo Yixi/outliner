@@ -22,12 +22,14 @@ workflows:
   test_and_deploy:
     jobs:
       - test:
-        branches:
-          ignore:
-            - gh-pages
+          filters:
+            branches:
+              ignore:
+                - gh-pages
       - build:
-          branches:
-            ignore:
-            - gh-pages
+          filters:
+            branches:
+              ignore:
+                - gh-pages
           requires:
             - test
