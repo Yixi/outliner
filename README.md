@@ -1,5 +1,8 @@
 ### Outliner
 
+Last Build: [![CircleCI](https://circleci.com/gh/Yixi/outliner/tree/master.svg?style=svg)](https://circleci.com/gh/Yixi/outliner/tree/master)
+
+
 this is a project rebuild for diigo outliner
 
 [https://www.diigo.com/outliner/start](https://www.diigo.com/outliner/start)

@@ -6,7 +6,8 @@ jobs:
     steps:
       - checkout
       - run: yarn install
-      - run: yarn test
+      - run: yarn test:coverage
+      - run: yarn coverage:report
   build:
     docker:
       - image: circleci/node:8.11.4-browsers

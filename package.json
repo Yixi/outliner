@@ -20,7 +20,9 @@
     "start": "webpack-dev-server --open --config build/webpack.dev.config.js --progress",
     "build": "webpack --config build/webpack.prod.config.js",
     "deploy:gh-page": "yarn build && node ./build/gh-pages-deploy.js",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "coverage:report": "cat ./coverage/lcov.info | COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN coveralls"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.6",
@@ -34,6 +36,7 @@
     "@types/uuid": "^3.4.4",
     "autoprefixer": "^9.3.1",
     "clean-webpack-plugin": "^0.1.19",
+    "coveralls": "^3.0.2",
     "css-loader": "^1.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
