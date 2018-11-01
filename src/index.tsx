@@ -7,4 +7,10 @@ import './styles/base.less'
 
 const mountNode = document.getElementById('MainApp')
 
+if (process.env.NODE_ENV === 'development') {
+  store.ui.initDebugConfig({
+    debugMode: true,
+  })
+}
+
 ReactDOM.render(<Provider {...store}><App/></Provider>, mountNode)

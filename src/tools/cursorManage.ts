@@ -1,4 +1,5 @@
 import { SelectionState } from 'draft-js'
+import Timeout = NodeJS.Timeout
 
 export interface ICursorInfo {
   editorId: string,
@@ -11,6 +12,7 @@ type ICursorListener = (cursor?: ICursorInfo) => void
 class CursorManage {
 
   private listeners: ICursorListener[] = []
+  private applyTimer: Timeout
 
   private cursor: ICursorInfo = {
     editorId: null,
@@ -33,8 +35,11 @@ class CursorManage {
   }
 
   applyStackCursor() {
-    console.info('Apply cursor', this.cursor)
-    setTimeout(() => {
+
+    clearTimeout(this.applyTimer)
+
+    this.applyTimer = setTimeout(() => {
+      console.info('Apply cursor', this.cursor)
       this.listeners.forEach((listener) => {
         listener(this.cursor)
       })

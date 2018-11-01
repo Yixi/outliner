@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { ContentState, Editor as DraftEditor, EditorState, SelectionState } from 'draft-js'
+import { ContentState, Editor as DraftEditor, EditorState } from 'draft-js'
 import { DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBinding'
 import { COMMAND } from '@root/constant/commands'
 import { observer } from 'mobx-react'
 import cursorMange, { ICursorInfo } from '@root/tools/cursorManage'
 import { debounce } from 'lodash-es'
+import { EDITOR_SYNC_TIME } from '@root/constant/editor'
 
 interface IProps {
   contentState?: ContentState
@@ -43,7 +44,7 @@ export default class Editor extends React.Component<IProps, IState> {
 
   debounceContentChange = debounce((editorState: EditorState) => {
     this.syncContent(editorState)
-  }, 1000)
+  }, EDITOR_SYNC_TIME)
 
   componentDidMount() {
     this.destroyCursorListener = cursorMange.onChange(this.setCursor)
