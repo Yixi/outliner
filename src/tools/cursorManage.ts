@@ -33,9 +33,12 @@ class CursorManage {
   }
 
   applyStackCursor() {
-    this.listeners.forEach((listener) => {
-      listener(this.cursor)
-    })
+    console.info('Apply cursor', this.cursor)
+    setTimeout(() => {
+      this.listeners.forEach((listener) => {
+        listener(this.cursor)
+      })
+    }, 0)
   }
 
   getCursor() {

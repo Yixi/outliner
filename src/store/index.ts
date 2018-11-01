@@ -1,5 +1,5 @@
 import data from './data/index'
-import ui from './ui'
+import ui from './UI'
 
 export default {
   data,

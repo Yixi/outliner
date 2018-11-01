@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { IBulletPoint } from '@root/store/data'
-import { observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import './index.less'
 import Editor from '@root/components/editor'
 import { EditorState } from 'draft-js'
@@ -9,13 +9,16 @@ import { buildAction } from '@root/command-action/buildAction'
 import { actionProcess } from '@root/action-log/actionProcess'
 import classNames from 'classnames'
 import cursorMange from '@root/tools/cursorManage'
+import { UI } from '@root/store/UI'
 
 interface IProps {
+  ui?: UI,
   bulletPoint: IBulletPoint,
   index: number,
   parentId?: string
 }
 
+@inject('ui')
 @observer
 export default class BulletPoint extends React.Component<IProps> {
 
@@ -74,12 +77,21 @@ export default class BulletPoint extends React.Component<IProps> {
     )
   }
 
+  renderDebugArea = () => {
+    if (this.props.ui.debugMode && this.props.ui.showBulletPointId) {
+      return (
+        <div className="bullet-point-debug">Id: {this.props.bulletPoint.id}</div>
+      )
+    }
+  }
+
   render() {
 
     const {bulletPoint} = this.props
 
     return (
       <div className="bullet-point">
+        {this.renderDebugArea()}
         {this.renderAction()}
         <div className="bullet-point-content">
           <Editor
