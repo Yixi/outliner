@@ -1,11 +1,8 @@
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
-import { EditorState } from 'draft-js'
+import { IActionBuildParams } from '@root/command-action/buildAction'
 
 export const generateEditAction = (
-  {editorState, currentId}: {
-    editorState: EditorState,
-    currentId: string,
-  },
+  {editorState, currentId}: Partial<IActionBuildParams>,
 ) => {
 
   return [

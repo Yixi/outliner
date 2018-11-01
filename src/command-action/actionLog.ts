@@ -4,6 +4,7 @@ import { ContentState } from 'draft-js'
 export enum ACTION_TYPE {
   CREATE = 'CREATE',
   EDIT = 'EDIT',
+  MOVE = 'MOVE',
 }
 
 interface IActionDataMeta {
@@ -32,11 +33,20 @@ class Log {
 
   }
 
-  private static generateEditLog(currentData: IActionDataMeta, prvData: IActionDataMeta): IActionLog {
+  private static generateEditLog(currentData: IActionDataMeta, prevData: IActionDataMeta): IActionLog {
     return {
       type: ACTION_TYPE.EDIT,
       data: currentData,
-      prevData: prvData,
+      prevData,
+      time: dayjs().unix(),
+    }
+  }
+
+  private static generateMoveLog(currentData: IActionDataMeta, prevData: IActionDataMeta): IActionLog {
+    return {
+      type: ACTION_TYPE.MOVE,
+      data: currentData,
+      prevData,
       time: dayjs().unix(),
     }
   }
@@ -46,9 +56,10 @@ class Log {
     currentData: IActionDataMeta,
     prevData?: IActionDataMeta,
   ): IActionLog {
-    const logCommand: { [key: string]: (currentData: IActionDataMeta, prevData?: IActionDataMeta) => IActionLog} = {
+    const logCommand: { [key: string]: (currentData: IActionDataMeta, prevData?: IActionDataMeta) => IActionLog } = {
       [ACTION_TYPE.CREATE]: Log.generateCreateLog,
       [ACTION_TYPE.EDIT]: Log.generateEditLog,
+      [ACTION_TYPE.MOVE]: Log.generateMoveLog,
     }
 
     if (logCommand[type]) {

@@ -1,10 +1,8 @@
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
+import { IActionBuildParams } from '@root/command-action/buildAction'
 
 export const generateExpandAction = (
-  {currentId, expand}: {
-    currentId: string,
-    expand: boolean,
-  },
+  {currentId, expand}: Partial<IActionBuildParams>,
 ) => {
   return [
     actionLog.generateLog(

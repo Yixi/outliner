@@ -1,7 +1,9 @@
 import data from './data/index'
 import ui from './UI'
 
-export default {
+const store = {
   data,
   ui,
 }
+
+export default store

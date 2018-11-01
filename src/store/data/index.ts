@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx'
 import { ACTION_TYPE, IActionLog } from '@root/command-action/actionLog'
-import { cloneDeep } from 'lodash-es'
+import { cloneDeep, indexOf } from 'lodash-es'
 import { ContentState } from 'draft-js'
 
 export interface IBulletPoint {
@@ -35,9 +35,24 @@ export class Data {
     const processMap: { [key: string]: (log: IActionLog) => void } = {
       [ACTION_TYPE.CREATE]: this.processCreateLog,
       [ACTION_TYPE.EDIT]: this.processEditLog,
+      [ACTION_TYPE.MOVE]: this.processMoveLog,
     }
 
     processMap[log.type](log)
+
+  }
+
+  getPrevBulletPointById = (bulletPointId: string, index: number) => {
+    return this.getChildrenById(this.treeHash[bulletPointId].parentId)[index - 1]
+  }
+
+  getBulletPointInfoById = (bulletPointId: string): [string, number] => {
+    const currentBulletPoint = this.treeHash[bulletPointId]
+
+    return [
+      currentBulletPoint.parentId,
+      indexOf(this.getChildrenById(currentBulletPoint.parentId), currentBulletPoint)
+    ]
 
   }
 
@@ -71,8 +86,20 @@ export class Data {
   }
 
   private processEditLog = (log: IActionLog) => {
-    const bulletPoint = this.treeHash[log.data.id]
-    Object.assign(bulletPoint, log.data)
+    const touchedBulletPoint = this.treeHash[log.data.id]
+    Object.assign(touchedBulletPoint, log.data)
+  }
+
+  private processMoveLog = (log: IActionLog) => {
+    const touchedBulletPoint = this.treeHash[log.data.id]
+    touchedBulletPoint.parentId = log.data.parentId
+
+    const prevParentChildren = this.getChildrenById(log.prevData.parentId)
+    prevParentChildren.splice(log.prevData.index, 1)
+
+    const currentParentChildren = this.getChildrenById(log.data.parentId)
+    currentParentChildren.splice(log.data.index, 0, touchedBulletPoint)
+
   }
 
 }

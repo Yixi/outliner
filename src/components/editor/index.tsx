@@ -58,7 +58,6 @@ export default class Editor extends React.Component<IProps, IState> {
 
   setCursor = (cursor: ICursorInfo) => {
     if (cursor.editorId === this.props.id) {
-      console.log(this.editorContentRef)
       this.editorContentRef.focus()
       // TODO: need fina a right way to set the cursor
       if (cursor.selectionState) {
@@ -111,6 +110,7 @@ export default class Editor extends React.Component<IProps, IState> {
     return (
       <div>
         <DraftEditor
+          tabIndex={-1}
           editorState={this.state.editorState}
           onChange={this.onChange}
           handleKeyCommand={this.handleKeyCommand}

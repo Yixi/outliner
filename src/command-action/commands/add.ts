@@ -1,20 +1,14 @@
-import { ContentState, EditorState, Modifier } from 'draft-js'
+import { ContentState, Modifier } from 'draft-js'
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
 import uuid = require('uuid')
 import cursorMange from '@root/tools/cursorManage'
 import { indexOf } from 'lodash-es'
+import { IActionBuildParams } from '@root/command-action/buildAction'
 
 export const generateCreateAction = (
   {
     editorState, currentId, parentId, index, expand, haveChildren,
-  }: {
-    editorState?: EditorState,
-    currentId: string,
-    parentId: string,
-    index: number,
-    expand: boolean,
-    haveChildren: boolean,
-  }) => {
+  }: Partial<IActionBuildParams>) => {
 
   const currentContentState = editorState.getCurrentContent()
   const splitContent = Modifier.splitBlock(currentContentState, editorState.getSelection())
