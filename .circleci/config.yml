@@ -1,2 +1,25 @@
 version: 2
 jobs:
+  test:
+    docker:
+      - image: circleci/node;8.11.4-browsers
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn test
+  build:
+    docker:
+      - image: circleci/node;8.11.4-browsers
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn build
+      - run: yarn deploy:gh-page
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
