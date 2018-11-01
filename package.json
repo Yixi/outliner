@@ -15,6 +15,34 @@
     "react-dom": "^16.6.0",
     "uuid": "^3.3.2"
   },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/testSetup.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(j|t)sx?$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!lodash-es/.*)"
+    ],
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss|png|svg)$": "<rootDir>/assetsMock.ts",
+      "@root(.*)$": "<rootDir>/src/$1"
+    },
+    "collectCoverageFrom":  [
+      "src/**/*.{ts,tsx}"
+    ],
+    "roots": [
+      "./src"
+    ]
+  },
   "scripts": {
     "dev": "yarn start",
     "start": "webpack-dev-server --open --config build/webpack.dev.config.js --progress",
