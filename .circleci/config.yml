@@ -1,9 +1,6 @@
 version: 2
 jobs:
   test:
-    branches:
-      ignore:
-        - gh-pages
     docker:
       - image: circleci/node:8.11.4-browsers
     steps:
