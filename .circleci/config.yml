@@ -2,14 +2,14 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/node;8.11.4-browsers
+      - image: circleci/node:8.11.4-browsers
     steps:
       - checkout
       - run: yarn install
       - run: yarn test
   build:
     docker:
-      - image: circleci/node;8.11.4-browsers
+      - image: circleci/node:8.11.4-browsers
     steps:
       - checkout
       - run: yarn install
