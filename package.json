@@ -36,7 +36,7 @@
       "\\.(css|less|sass|scss|png|svg)$": "<rootDir>/assetsMock.ts",
       "@root(.*)$": "<rootDir>/src/$1"
     },
-    "collectCoverageFrom":  [
+    "collectCoverageFrom": [
       "src/**/*.{ts,tsx}"
     ],
     "roots": [

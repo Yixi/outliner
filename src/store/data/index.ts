@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx'
 import { ACTION_TYPE, IActionLog } from '@root/command-action/actionLog'
-import { cloneDeep, indexOf } from 'lodash-es'
+import { clone, indexOf } from 'lodash-es'
 import { ContentState } from 'draft-js'
 
 export interface IBulletPoint {
@@ -74,7 +74,7 @@ export class Data {
   }
 
   private processCreateLog = (log: IActionLog) => {
-    const newBulletPoint = cloneDeep(BULLET_POINT_TEMP)
+    const newBulletPoint = clone(BULLET_POINT_TEMP)
     const parentChildren = this.getChildrenById(log.data.parentId)
 
     Object.assign(newBulletPoint, log.data)
