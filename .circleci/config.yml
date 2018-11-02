@@ -8,6 +8,7 @@ jobs:
       - run: yarn install
       - run: yarn test:coverage
       - run: yarn coverage:report
+      - run: yarn sonarqube
   build:
     docker:
       - image: circleci/node:8.11.4-browsers
