@@ -53,6 +53,7 @@ export default class Editor extends React.Component<IProps, IState> {
   }
 
   componentWillUnmount() {
+    this.forceSyncContent()
     this.destroyCursorListener()
   }
 
@@ -81,6 +82,11 @@ export default class Editor extends React.Component<IProps, IState> {
     }
   }
 
+  forceSyncContent = () => {
+    this.debounceContentChange.cancel()
+    this.syncContent(this.state.editorState)
+  }
+
   setEditorRef = (editor: DraftEditor) => {
     this.editorContentRef = editor
   }
@@ -99,6 +105,8 @@ export default class Editor extends React.Component<IProps, IState> {
 
   handleTab = (event: React.KeyboardEvent) => {
     event.preventDefault()
+    this.forceSyncContent()
+
     if (event.shiftKey) {
       this.props.onCommandEvent(COMMAND.OUTDENT, this.state.editorState)
     } else {
