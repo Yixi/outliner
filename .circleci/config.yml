@@ -7,7 +7,6 @@ jobs:
       - checkout
       - run: yarn install
       - run: yarn test:coverage
-      - run: yarn coverage:report
       - run: yarn sonarqube
   build:
     docker:

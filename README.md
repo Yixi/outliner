@@ -1,7 +1,11 @@
 ### Outliner
 
 Last Build: [![CircleCI](https://circleci.com/gh/Yixi/outliner/tree/master.svg?style=svg)](https://circleci.com/gh/Yixi/outliner/tree/master)
-[![Coverage Status](https://coveralls.io/repos/github/Yixi/outliner/badge.svg?branch=master)](https://coveralls.io/github/Yixi/outliner?branch=master)
+[![Quality status](https://sonarcloud.io/api/project_badges/measure?project=Yixi_outliner&metric=alert_status)](https://sonarcloud.io/dashboard?id=Yixi_outliner)
+[![Coverage Status](https://sonarcloud.io/api/project_badges/measure?project=Yixi_outliner&metric=coverage)](https://sonarcloud.io/dashboard?id=Yixi_outliner)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Yixi_outliner&metric=bugs)](https://sonarcloud.io/dashboard?id=Yixi_outliner)
+[![code smell](https://sonarcloud.io/api/project_badges/measure?project=Yixi_outliner&metric=code_smells)](https://sonarcloud.io/dashboard?id=Yixi_outliner)
+[![Lines of code](https://sonarcloud.io/api/project_badges/measure?project=Yixi_outliner&metric=ncloc)](https://sonarcloud.io/dashboard?id=Yixi_outliner)
 
 this is a project rebuild for diigo outliner
 
