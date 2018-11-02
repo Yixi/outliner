@@ -2,8 +2,7 @@ import { Data, IBulletPoint } from '@root/store/data/index'
 import { ContentState } from 'draft-js'
 import { ACTION_TYPE } from '@root/command-action/actionLog'
 
-// skip with test performance issue
-describe.skip('Data store test', () => {
+describe('Data store test', () => {
 
   test('should init tree correct', () => {
     const treeData: IBulletPoint[] = [
@@ -30,12 +29,12 @@ describe.skip('Data store test', () => {
         expand: true,
       },
     ]
-
     const dataStore = new Data()
-
     dataStore.setTree(treeData)
 
-    expect(dataStore.tree).toEqual(treeData)
+    expect(dataStore.tree[0].id).toEqual('1')
+    expect(dataStore.tree[1].id).toEqual('2')
+    expect(dataStore.tree[1].children[0].id).toEqual('3')
   })
 
   test('should porcess create log', () => {
