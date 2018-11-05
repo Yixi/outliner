@@ -75,6 +75,7 @@
     "jest": "^23.6.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.4",
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^3.0.0",
     "sonarqube-scanner": "^2.1.2",

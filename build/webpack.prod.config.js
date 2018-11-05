@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require("clean-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const PORT = 4222;
 const HOST = 'http://localhost';
@@ -13,9 +14,9 @@ module.exports = {
     app: '../src/index.tsx'
   },
   output: {
-    filename: 'app-[hash:7].js',
+    filename: 'app.[hash:7].js',
     path: path.join(__dirname, '../dist'),
-    chunkFilename: "[name]-[chunkhash].js",
+    chunkFilename: "[name].[chunkhash].js",
     publicPath: ''
   },
   context: path.resolve(__dirname, '../src'),
@@ -28,7 +29,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {enforce: "pre", test: /\.js$/, loader: "source-map-loader"},
       {
         test: /\.tsx?$/,
         use: [
@@ -43,7 +43,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          "style-loader",
+          MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
           "less-loader",
@@ -69,6 +69,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "../src/app.html",
       filename: "index.html",
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].[hash:7].css",
+      chunkFilename: "[id].[hash:7].css"
     }),
     new webpack.HashedModuleIdsPlugin(),
 
