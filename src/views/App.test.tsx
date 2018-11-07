@@ -7,6 +7,5 @@ describe('App Page test', () => {
     const wrapper = shallow(<App/>)
 
     expect(wrapper.find('HeaderBar').length).toEqual(1)
-    expect(wrapper.find('DebugBar').length).toEqual(1)
   })
 })

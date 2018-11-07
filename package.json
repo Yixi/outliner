@@ -41,7 +41,8 @@
     ],
     "roots": [
       "./src"
-    ]
+    ],
+    "verbose": false
   },
   "scripts": {
     "dev": "yarn start",
