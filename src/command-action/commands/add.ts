@@ -1,9 +1,9 @@
 import { ContentState, Modifier } from 'draft-js'
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
-import uuid = require('uuid')
 import cursorMange from '@root/tools/cursorManage'
 import { indexOf } from 'lodash-es'
 import { IActionBuildParams } from '@root/command-action/buildAction'
+import uuid = require('uuid')
 
 export const generateCreateAction = (
   {
@@ -12,6 +12,7 @@ export const generateCreateAction = (
 
   const currentContentState = editorState.getCurrentContent()
   const splitContent = Modifier.splitBlock(currentContentState, editorState.getSelection())
+  console.log(splitContent.toJS())
   const blockArray = splitContent.getBlocksAsArray()
   const selectBlockStartIndex = indexOf(
     blockArray, splitContent.getBlockForKey(splitContent.getSelectionBefore().getStartKey()))
@@ -32,6 +33,7 @@ export const generateCreateAction = (
     cursorMange.setNextCursor({editorId: newId})
     return [
       actionLog.generateLog(ACTION_TYPE.CREATE, {id: newId, parentId, index: index + 1}),
+      actionLog.generateLog(ACTION_TYPE.EDIT,  {id: currentId, content: leftContentState}),
     ]
   } else {
 

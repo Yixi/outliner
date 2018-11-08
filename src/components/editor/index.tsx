@@ -71,6 +71,7 @@ export default class Editor extends React.Component<IProps, IState> {
   }
 
   onChange = (editorState: EditorState) => {
+    console.log(editorState.getSelection().toJS())
     this.setState({editorState}, () => {
       this.debounceContentChange(editorState)
     })
