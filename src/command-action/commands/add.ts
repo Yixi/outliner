@@ -12,7 +12,6 @@ export const generateCreateAction = (
 
   const currentContentState = editorState.getCurrentContent()
   const splitContent = Modifier.splitBlock(currentContentState, editorState.getSelection())
-  console.log(splitContent.toJS())
   const blockArray = splitContent.getBlocksAsArray()
   const selectBlockStartIndex = indexOf(
     blockArray, splitContent.getBlockForKey(splitContent.getSelectionBefore().getStartKey()))
