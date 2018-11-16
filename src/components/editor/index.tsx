@@ -21,7 +21,7 @@ interface IState {
 @observer
 export default class Editor extends React.Component<IProps, IState> {
   static defaultProps = {
-    content: '',
+    contentState: ContentState.createFromText(''),
   }
 
   static getDerivedStateFromProps(props: IProps, state: IState) {
@@ -71,7 +71,6 @@ export default class Editor extends React.Component<IProps, IState> {
   }
 
   onChange = (editorState: EditorState) => {
-    console.log(editorState.getSelection().toJS())
     this.setState({editorState}, () => {
       this.debounceContentChange(editorState)
     })
