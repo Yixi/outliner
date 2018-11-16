@@ -39,7 +39,6 @@ class CursorManage {
     clearTimeout(this.applyTimer)
 
     this.applyTimer = setTimeout(() => {
-      console.info('Apply cursor', this.cursor)
       this.listeners.forEach((listener) => {
         listener(this.cursor)
       })
