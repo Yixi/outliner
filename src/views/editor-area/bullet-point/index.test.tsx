@@ -2,7 +2,7 @@ import BulletPointComponent from '@root/views/editor-area/bullet-point/index'
 import * as React from 'react'
 import { shallow } from 'enzyme'
 import { UI } from '@root/store/UI'
-import { ContentState} from 'draft-js'
+import { ContentState } from 'draft-js'
 import { IBulletPoint } from '@root/store/data'
 
 const BulletPoint = BulletPointComponent as any
