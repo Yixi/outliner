@@ -8,41 +8,12 @@
     "classnames": "^2.2.6",
     "dayjs": "^1.7.7",
     "draft-js": "^0.10.5",
-    "lodash-es": "^4.17.11",
+    "lodash": "^4.17.11",
     "mobx": "^5.5.2",
     "mobx-react": "^5.3.6",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "uuid": "^3.3.2"
-  },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/testSetup.ts"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx"
-    ],
-    "transform": {
-      "^.+\\.(j|t)sx?$": "ts-jest"
-    },
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!lodash-es/.*)"
-    ],
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleNameMapper": {
-      "\\.(css|less|sass|scss|png|svg)$": "<rootDir>/assetsMock.ts",
-      "@root(.*)$": "<rootDir>/src/$1"
-    },
-    "collectCoverageFrom": [
-      "src/**/*.{ts,tsx}"
-    ],
-    "roots": [
-      "./src"
-    ],
-    "verbose": false
   },
   "scripts": {
     "dev": "yarn start",
@@ -55,12 +26,12 @@
     "coverage:report": "cat ./coverage/lcov.info | COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN coveralls"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.118",
     "@types/classnames": "^2.2.6",
     "@types/draft-js": "^0.10.26",
     "@types/enzyme": "^3.1.14",
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.9",
-    "@types/lodash-es": "^4.17.1",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
     "@types/uuid": "^3.4.4",

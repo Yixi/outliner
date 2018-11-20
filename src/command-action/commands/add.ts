@@ -1,7 +1,7 @@
 import { ContentState, Modifier } from 'draft-js'
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
 import cursorMange from '@root/tools/cursorManage'
-import { indexOf } from 'lodash-es'
+import { indexOf } from 'lodash'
 import { IActionBuildParams } from '@root/command-action/buildAction'
 import uuid = require('uuid')
 

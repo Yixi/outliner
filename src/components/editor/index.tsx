@@ -4,7 +4,7 @@ import { DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBindi
 import { COMMAND } from '@root/constant/commands'
 import { observer } from 'mobx-react'
 import cursorMange, { ICursorInfo } from '@root/tools/cursorManage'
-import { debounce } from 'lodash-es'
+import { debounce } from 'lodash'
 import { EDITOR_SYNC_TIME } from '@root/constant/editor'
 
 interface IProps {

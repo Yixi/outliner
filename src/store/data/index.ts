@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx'
 import { ACTION_TYPE, IActionLog } from '@root/command-action/actionLog'
-import { clone, indexOf } from 'lodash-es'
+import { clone, indexOf } from 'lodash'
 import { ContentState } from 'draft-js'
 
 export interface IBulletPoint {
