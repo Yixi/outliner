@@ -5,7 +5,7 @@ import cursorMange from '@root/tools/cursorManage'
 
 export const generateIndentAction = ({currentId, parentId, index, editorState}: Partial<IActionBuildParams>) => {
 
-  const prevBulletPoint = store.data.getPrevBulletPointById(currentId, index)
+  const prevBulletPoint = store.data.getSameLevelPrevBulletPointById(currentId, index)
 
   if (prevBulletPoint) {
 

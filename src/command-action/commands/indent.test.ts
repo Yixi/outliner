@@ -20,9 +20,9 @@ const mockContentState = convertFromRaw({
 describe('test indent command', () => {
   test('test can indent',() => {
 
-    store.data.getPrevBulletPointById = jest.fn()
+    store.data.getSameLevelPrevBulletPointById = jest.fn()
 
-    const fn = store.data.getPrevBulletPointById as any
+    const fn = store.data.getSameLevelPrevBulletPointById as any
 
     fn.mockReturnValue({id: '1', children: []})
 
@@ -42,9 +42,9 @@ describe('test indent command', () => {
   })
 
   test('test can not indent', () => {
-    store.data.getPrevBulletPointById = jest.fn()
+    store.data.getSameLevelPrevBulletPointById = jest.fn()
 
-    const fn = store.data.getPrevBulletPointById as any
+    const fn = store.data.getSameLevelPrevBulletPointById as any
 
     fn.mockReturnValue(null)
 

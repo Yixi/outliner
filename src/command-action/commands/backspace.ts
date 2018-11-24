@@ -1,16 +1,29 @@
 import { IActionBuildParams } from '@root/command-action/buildAction'
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
 import { splitContentState } from '@root/tools/splitContentState'
+import store from '@root/store'
+import cursorMange from '@root/tools/cursorManage'
+import { EditorState } from 'draft-js'
 
 export const generateBackspaceAction = (
-  {currentId, editorState}: Partial<IActionBuildParams>) => {
+  {currentId, editorState, index}: Partial<IActionBuildParams>) => {
 
   const currentContentState = editorState.getCurrentContent()
   const [leftContentState, rightContentState] = splitContentState(editorState)
 
-  const isCase1 = currentContentState.getPlainText().length === 0
+  const cursorBulletPoint = store.data.getPrevBulletPointById(currentId, index)
 
-  console.log('backspace action')
+  if (cursorBulletPoint) {
+    let tempEditorState = EditorState.createWithContent(cursorBulletPoint.content)
+    tempEditorState = EditorState.moveFocusToEnd(tempEditorState)
+
+    cursorMange.setNextCursor({
+      editorId: cursorBulletPoint.id,
+      selectionState: tempEditorState.getSelection(),
+    })
+  }
+
+  const isCase1 = currentContentState.getPlainText().length === 0
 
   if (isCase1) {
     console.log('case 1')

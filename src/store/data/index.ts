@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx'
 import { ACTION_TYPE, IActionLog } from '@root/command-action/actionLog'
-import { clone , findIndex, indexOf } from 'lodash'
+import { clone, findIndex, indexOf } from 'lodash'
 import { ContentState } from 'draft-js'
 
 export interface IBulletPoint {
@@ -43,7 +43,12 @@ export class Data {
 
   }
 
-  getPrevBulletPointById = (bulletPointId: string, index: number) => {
+  getPrevBulletPointById = (bulletPointId: string, index: number): IBulletPoint => {
+    const sameLevelPrevBulletPoint = this.getSameLevelPrevBulletPointById(bulletPointId, index)
+    return this.getBulletPointLastChild(sameLevelPrevBulletPoint.id)
+  }
+
+  getSameLevelPrevBulletPointById = (bulletPointId: string, index: number): IBulletPoint => {
     return this.getChildrenById(this.treeHash[bulletPointId].parentId)[index - 1]
   }
 
@@ -57,6 +62,15 @@ export class Data {
 
   }
 
+  private getBulletPointLastChild = (bulletPointId: string): IBulletPoint => {
+    const currentBulletPoint = this.treeHash[bulletPointId]
+    if (currentBulletPoint.children.length > 0) {
+      return this.getBulletPointLastChild(currentBulletPoint.children[currentBulletPoint.children.length - 1].id)
+    } else {
+      return currentBulletPoint
+    }
+  }
+
   private buildHash = (tree: IBulletPoint[]) => {
     tree.forEach((bulletPoint) => {
       this.treeHash[bulletPoint.id] = bulletPoint
@@ -67,7 +81,7 @@ export class Data {
     })
   }
 
-  private getChildrenById = (bulletPointId: string) => {
+  private getChildrenById = (bulletPointId: string): IBulletPoint[] => {
     if (bulletPointId) {
       return this.treeHash[bulletPointId].children
     }
