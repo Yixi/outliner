@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { ContentState, Editor as DraftEditor, EditorState } from 'draft-js'
 import { DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBinding'
-import { COMMAND } from '@root/constant/commands'
+import { COMMAND, DRAFT_JS_COMMAND } from '@root/constant/commands'
 import { observer } from 'mobx-react'
 import cursorMange, { ICursorInfo } from '@root/tools/cursorManage'
 import { debounce } from 'lodash'
 import { EDITOR_SYNC_TIME } from '@root/constant/editor'
+import { splitContentState } from '@root/tools/splitContentState'
 
 interface IProps {
   contentState?: ContentState
@@ -94,6 +95,13 @@ export default class Editor extends React.Component<IProps, IState> {
   handleKeyCommand = (command: COMMAND, editorState: EditorState) => {
 
     console.info('Handle command', command)
+
+    if (command.toString() === DRAFT_JS_COMMAND.BACKSPACE) {
+      const [leftContentState] = splitContentState(editorState)
+      if (leftContentState.getPlainText().length === 0) {
+        command = COMMAND.BACKSPACE
+      }
+    }
 
     if (COMMAND[command]) {
       this.props.onCommandEvent(command, editorState)

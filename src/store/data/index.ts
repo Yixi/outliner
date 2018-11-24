@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx'
 import { ACTION_TYPE, IActionLog } from '@root/command-action/actionLog'
-import { clone, indexOf } from 'lodash'
+import { clone , findIndex, indexOf } from 'lodash'
 import { ContentState } from 'draft-js'
 
 export interface IBulletPoint {
@@ -36,6 +36,7 @@ export class Data {
       [ACTION_TYPE.CREATE]: this.processCreateLog,
       [ACTION_TYPE.EDIT]: this.processEditLog,
       [ACTION_TYPE.MOVE]: this.processMoveLog,
+      [ACTION_TYPE.DELETE]: this.processDeleteLog,
     }
 
     processMap[log.type](log)
@@ -51,7 +52,7 @@ export class Data {
 
     return [
       currentBulletPoint.parentId,
-      indexOf(this.getChildrenById(currentBulletPoint.parentId), currentBulletPoint)
+      indexOf(this.getChildrenById(currentBulletPoint.parentId), currentBulletPoint),
     ]
 
   }
@@ -100,6 +101,14 @@ export class Data {
     const currentParentChildren = this.getChildrenById(log.data.parentId)
     currentParentChildren.splice(log.data.index, 0, touchedBulletPoint)
 
+  }
+
+  private processDeleteLog = (log: IActionLog) => {
+    const touchedBulletPoint = this.treeHash[log.data.id]
+    const parentChildren = this.getChildrenById(touchedBulletPoint.parentId)
+
+    const index = findIndex(parentChildren, {id: log.data.id})
+    parentChildren.splice(index, 1)
   }
 
 }

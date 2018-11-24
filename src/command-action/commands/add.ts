@@ -1,9 +1,9 @@
-import { ContentState, Modifier } from 'draft-js'
+import { ContentState } from 'draft-js'
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
 import cursorMange from '@root/tools/cursorManage'
-import { indexOf } from 'lodash'
 import { IActionBuildParams } from '@root/command-action/buildAction'
 import uuid = require('uuid')
+import { splitContentState } from '@root/tools/splitContentState'
 
 export const generateCreateAction = (
   {
@@ -11,12 +11,9 @@ export const generateCreateAction = (
   }: Partial<IActionBuildParams>) => {
 
   const currentContentState = editorState.getCurrentContent()
-  const splitContent = Modifier.splitBlock(currentContentState, editorState.getSelection())
-  const blockArray = splitContent.getBlocksAsArray()
-  const selectBlockStartIndex = indexOf(
-    blockArray, splitContent.getBlockForKey(splitContent.getSelectionBefore().getStartKey()))
-  const leftContentState = ContentState.createFromBlockArray(blockArray.slice(0, selectBlockStartIndex + 1))
-  const rightContentState = ContentState.createFromBlockArray(blockArray.slice(selectBlockStartIndex + 1))
+
+  const [leftContentState, rightContentState] = splitContentState(editorState)
+
   const newId = uuid()
 
   const isCase1 = haveChildren && rightContentState.getPlainText().length === 0 && expand

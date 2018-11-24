@@ -5,6 +5,7 @@ export enum ACTION_TYPE {
   CREATE = 'CREATE',
   EDIT = 'EDIT',
   MOVE = 'MOVE',
+  DELETE = 'DELETE',
 }
 
 interface IActionDataMeta {
@@ -51,6 +52,15 @@ class Log {
     }
   }
 
+  private static generateDeleteLog(currentData: IActionDataMeta, prevData: IActionDataMeta): IActionLog {
+    return {
+      type: ACTION_TYPE.DELETE,
+      data: currentData,
+      prevData,
+      time: dayjs().unix(),
+    }
+  }
+
   generateLog(
     type: ACTION_TYPE,
     currentData: IActionDataMeta,
@@ -60,6 +70,7 @@ class Log {
       [ACTION_TYPE.CREATE]: Log.generateCreateLog,
       [ACTION_TYPE.EDIT]: Log.generateEditLog,
       [ACTION_TYPE.MOVE]: Log.generateMoveLog,
+      [ACTION_TYPE.DELETE]: Log.generateDeleteLog,
     }
 
     if (logCommand[type]) {
