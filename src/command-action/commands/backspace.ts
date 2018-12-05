@@ -43,6 +43,11 @@ export const generateBackspaceAction = (
     //   ...rightContentState.getBlocksAsArray(),
     // ])
 
+    cursorMange.setNextCursor({
+      editorId: currentId,
+      offset: sameLevelPrevBulletPoint.content.getPlainText().length,
+    })
+
     const content = ContentState.createFromText(
       `${sameLevelPrevBulletPoint.content.getPlainText()}${rightContentState.getPlainText()}`,
     )

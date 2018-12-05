@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ContentState, Editor as DraftEditor, EditorState } from 'draft-js'
+import { ContentState, Editor as DraftEditor, EditorState, SelectionState } from 'draft-js'
 import { DRAFT_HANDLE_VALUE, keyBinding } from '@root/components/editor/keyBinding'
 import { COMMAND, DRAFT_JS_COMMAND } from '@root/constant/commands'
 import { observer } from 'mobx-react'
@@ -65,6 +65,16 @@ export default class Editor extends React.Component<IProps, IState> {
       if (cursor.selectionState) {
         this.setState({
           editorState: EditorState.forceSelection(this.state.editorState, cursor.selectionState),
+        })
+      } else if (cursor.offset) {
+        this.setState({
+          editorState: EditorState.forceSelection(
+            this.state.editorState,
+            this.state.editorState.getSelection().merge({
+              anchorOffset: cursor.offset,
+              focusOffset: cursor.offset,
+            }) as SelectionState,
+          ),
         })
       }
       cursorMange.resetCursor()
