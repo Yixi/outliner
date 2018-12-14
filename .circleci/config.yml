@@ -5,6 +5,12 @@ executors:
       - image: circleci/node:11.1.0-browsers
     working_directory: /tmp/workspace
 jobs:
+  security-check:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - run: yarn audit
   test:
     executor: my-executor
     steps:
@@ -73,3 +79,10 @@ workflows:
                 - gh-pages
           requires:
             - build
+      - security-check:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+          requires:
+            - test
