@@ -2,7 +2,7 @@ import { ContentState } from 'draft-js'
 import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
 import cursorMange from '@root/tools/cursorManage'
 import { IActionBuildParams } from '@root/command-action/buildAction'
-import uuid from 'uuid'
+import * as uuid from 'uuid'
 import { splitContentState } from '@root/tools/splitContentState'
 
 export const generateCreateAction = (

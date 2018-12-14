@@ -1,20 +1,45 @@
-version: 2
-jobs:
-  test:
+version: 2.1
+executors:
+  my-executor:
     docker:
       - image: circleci/node:11.1.0-browsers
+    working_directory: /tmp/workspace
+jobs:
+  test:
+    executor: my-executor
     steps:
       - checkout
       - run: yarn install
       - run: yarn test:coverage
-      - run: yarn sonarqube
-  build:
-    docker:
-      - image: circleci/node:8.11.4-browsers
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - workspace
+  sonar:
+    executor: my-executor
     steps:
-      - checkout
-      - run: yarn install
+      - attach_workspace:
+          at: /tmp
+      - run: yarn sonarqube
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - workspace
+  build:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+          at: /tmp
       - run: yarn build
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - workspace
+  deploy:
+    executor: my-executor
+    steps:
+      - attach_workspace:
+          at: /tmp
       - run: git config --global user.email $GIT_EMAIL
       - run: git config --global user.name $GIT_NAME
       - run: yarn deploy:gh-page
@@ -27,6 +52,13 @@ workflows:
             branches:
               ignore:
                 - gh-pages
+      - sonar:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+          requires:
+            - test
       - build:
           filters:
             branches:
@@ -34,3 +66,10 @@ workflows:
                 - gh-pages
           requires:
             - test
+      - deploy:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+          requires:
+            - build
