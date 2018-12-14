@@ -3,6 +3,9 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin = require(
+  "webpack-bundle-analyzer").BundleAnalyzerPlugin
+const tsImportPluginFactory = require('ts-import-plugin')
 
 const PORT = 4222;
 const HOST = 'http://localhost';
@@ -35,8 +38,24 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              transpileOnly: true
-            }
+              transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [
+                  tsImportPluginFactory([
+                    {
+                      style: false,
+                      libraryName: 'lodash',
+                      libraryDirectory: null,
+                      camel2DashComponentName: false
+                    }
+
+                  ])
+                ]
+              }),
+              compilerOptions: {
+                module: 'es2015'
+              }
+            },
           }
         ]
       },
@@ -78,6 +97,6 @@ module.exports = {
 
     // prints more readable module names in the browser console on HMR updates
     //new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-
+    // new BundleAnalyzerPlugin(),
   ],
 }
