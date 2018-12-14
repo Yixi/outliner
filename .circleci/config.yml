@@ -48,6 +48,9 @@ jobs:
           at: /tmp
       - run: git config --global user.email $GIT_EMAIL
       - run: git config --global user.name $GIT_NAME
+      - add_ssh_keys:
+          fingerprints:
+            - "31:32:1d:d4:b1:b6:35:3d:47:e6:5f:39:e7:99:b7:77"
       - run: yarn deploy:gh-page
 workflows:
   version: 2
