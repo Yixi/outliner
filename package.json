@@ -19,7 +19,7 @@
     "dev": "yarn start",
     "start": "webpack-dev-server --open --config build/webpack.dev.config.js --progress",
     "build": "webpack --config build/webpack.prod.config.js",
-    "deploy:gh-page": "yarn build && node ./build/gh-pages-deploy.js",
+    "deploy:gh-page": "node ./build/gh-pages-deploy.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "sonarqube": "sonar-scanner -Dsonar.login=$SONAR_TOKEN",
