@@ -51,7 +51,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "8f:b0:8c:26:2c:32:ad:32:cf:c7:44:c0:07:27:ce:29"
-      - run: ssh -o StrictHostKeyChecking=no git@github.com
+      - run: ssh -o StrictHostKeyChecking=no git@github.com || true
       - run: yarn deploy:gh-page
 workflows:
   version: 2.1
