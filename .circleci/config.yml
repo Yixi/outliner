@@ -50,7 +50,8 @@ jobs:
       - run: git config --global user.name $GIT_NAME
       - add_ssh_keys:
           fingerprints:
-            - "d6:ea:99:0b:eb:e5:4d:27:95:e8:08:93:bb:dd:30:d7"
+            - "8f:b0:8c:26:2c:32:ad:32:cf:c7:44:c0:07:27:ce:29"
+      - run: ssh -o StrictHostKeyChecking=no git@github.com
       - run: yarn deploy:gh-page
 workflows:
   version: 2.1
