@@ -80,4 +80,45 @@ describe('Data store test', () => {
 
   })
 
+  test('shoud get prev bulletPoint correct', () => {
+    const treeData: IBulletPoint[] = [
+      {
+        id: '1',
+        content: ContentState.createFromText('1'),
+        parentId:null,
+        children: [],
+        expand: true,
+      },
+      {
+        id: '2',
+        content: ContentState.createFromText('2'),
+        parentId: null,
+        children: [
+          {
+            id: '3',
+            content: ContentState.createFromText('3'),
+            parentId: '2',
+            children: [],
+            expand: true,
+          },
+          {
+            id: '4',
+            content: ContentState.createFromText('4'),
+            parentId: '2',
+            children: [],
+            expand: true,
+          },
+        ],
+        expand: true,
+      },
+    ]
+
+    const dataStore = new Data()
+    dataStore.setTree(treeData)
+
+    expect(dataStore.getPrevBulletPoint('3', 0).id).toEqual('2')
+    expect(dataStore.getPrevBulletPoint('4', 1).id).toEqual('3')
+
+  })
+
 })
