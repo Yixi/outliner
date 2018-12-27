@@ -27,10 +27,6 @@ jobs:
       - attach_workspace:
           at: /tmp
       - run: yarn sonarqube
-      - persist_to_workspace:
-          root: /tmp
-          paths:
-            - workspace
   build:
     executor: my-executor
     steps:
