@@ -11,7 +11,7 @@ export interface IBulletPoint {
   children: IBulletPoint[]
 }
 
-const BULLET_POINT_TEMP: IBulletPoint = {
+export const BULLET_POINT_TEMP: IBulletPoint = {
   id: '',
   content: ContentState.createFromText(''),
   parentId: '',
