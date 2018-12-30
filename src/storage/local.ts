@@ -11,14 +11,10 @@ interface IBulletPointLocal extends Pick<IBulletPoint, Exclude<keyof IBulletPoin
   children: IBulletPointLocal[]
 }
 
-
 class StorageLocal {
 
   init() {
-    console.info('start local storage')
-
     this.initWatchTree()
-
   }
 
   store(tree: IBulletPoint[]) {
@@ -50,6 +46,7 @@ class StorageLocal {
       this.store(tree)
     }, 3 * 1000)
 
+    console.info('[Info] store for local service on')
     autorun(() => {
       debounceTreeChange(toJS(store.data.tree))
     })
