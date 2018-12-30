@@ -9,7 +9,8 @@ module.exports = {
     '@root(.*)$': '<rootDir>/src/$1'
   },
   collectCoverageFrom: [
-    'src/**/*.{ts,tsx}'
+    'src/**/*.{ts,tsx}',
+    '!src/components/editor/index.tsx'
   ],
   roots: [
     './src'
