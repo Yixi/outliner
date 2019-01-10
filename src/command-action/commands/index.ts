@@ -6,6 +6,7 @@ import { generateEditAction } from '@root/command-action/commands/edit'
 import { generateIndentAction } from '@root/command-action/commands/indent'
 import { generateOutdentAction } from '@root/command-action/commands/outdent'
 import { generateBackspaceAction } from '@root/command-action/commands/backspace'
+import { generateUpAction } from '@root/command-action/commands/up'
 
 export const actionGenerate: {
   [key: string]: (buildParams: IActionBuildParams) => IActionCommand,
@@ -16,4 +17,5 @@ export const actionGenerate: {
   [COMMAND.INDENT]: generateIndentAction,
   [COMMAND.OUTDENT]: generateOutdentAction,
   [COMMAND.BACKSPACE]: generateBackspaceAction,
+  [COMMAND.UP]: generateUpAction,
 }

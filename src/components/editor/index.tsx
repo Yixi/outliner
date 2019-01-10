@@ -132,6 +132,11 @@ export default class Editor extends React.Component<IProps, IState> {
     }
   }
 
+  handleUpArrow = (event: React.KeyboardEvent) => {
+    event.preventDefault()
+    this.props.onCommandEvent(COMMAND.UP, this.state.editorState)
+  }
+
   render() {
     return (
       <div>
@@ -143,6 +148,7 @@ export default class Editor extends React.Component<IProps, IState> {
           keyBindingFn={keyBinding}
           ref={this.setEditorRef}
           onTab={this.handleTab}
+          onUpArrow={this.handleUpArrow}
         />
       </div>
     )
