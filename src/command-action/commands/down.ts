@@ -3,11 +3,11 @@ import { IActionLog } from '@root/command-action/actionLog'
 import store from '@root/store'
 import cursorMange from '@root/tools/cursorManage'
 
-export const generateUpAction = (
+export const generateDownAction = (
   {currentId, index}: Partial<IActionBuildParams>,
 ) => {
 
-  const cursorBulletPoint = store.data.getPrevVisibleBulletPoint(currentId, index)
+  const cursorBulletPoint = store.data.getNextVisibleBulletPoint(currentId, index)
 
   cursorMange.setNextCursor({
     editorId: cursorBulletPoint.id,

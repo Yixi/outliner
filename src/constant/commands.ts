@@ -6,6 +6,7 @@ export enum COMMAND {
   OUTDENT = 'OUTDENT',
   BACKSPACE = 'BACKSPACE',
   UP = 'UP',
+  DOWN = 'DOWN',
 }
 
 export enum DRAFT_JS_COMMAND {
