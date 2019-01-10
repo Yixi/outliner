@@ -20,9 +20,9 @@ const mockContentState = convertFromRaw({
 describe('test backspace command', () => {
 
   test('test case 1', () => {
-    store.data.getPrevBulletPoint = jest.fn()
+    store.data.getPrevVisibleBulletPoint = jest.fn()
     store.data.getSameLevelPrevBulletPoint = jest.fn()
-    const prevFn = store.data.getPrevBulletPoint as any
+    const prevFn = store.data.getPrevVisibleBulletPoint as any
     const sameLevelPrevFn = store.data.getSameLevelPrevBulletPoint as any
 
     prevFn.mockReturnValue({
@@ -51,9 +51,9 @@ describe('test backspace command', () => {
   })
 
   test('test case 3', () => {
-    store.data.getPrevBulletPoint = jest.fn()
+    store.data.getPrevVisibleBulletPoint = jest.fn()
     store.data.getSameLevelPrevBulletPoint = jest.fn()
-    const prevFn = store.data.getPrevBulletPoint as any
+    const prevFn = store.data.getPrevVisibleBulletPoint as any
     const sameLevelPrevFn = store.data.getSameLevelPrevBulletPoint as any
 
     prevFn.mockReturnValue({

@@ -116,8 +116,8 @@ describe('Data store test', () => {
     const dataStore = new Data()
     dataStore.setTree(treeData)
 
-    expect(dataStore.getPrevBulletPoint('3', 0).id).toEqual('2')
-    expect(dataStore.getPrevBulletPoint('4', 1).id).toEqual('3')
+    expect(dataStore.getPrevVisibleBulletPoint('3', 0).id).toEqual('2')
+    expect(dataStore.getPrevVisibleBulletPoint('4', 1).id).toEqual('3')
 
   })
 

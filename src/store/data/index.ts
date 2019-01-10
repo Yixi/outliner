@@ -43,12 +43,12 @@ export class Data {
 
   }
 
-  getPrevBulletPoint = (bulletPointId: string, index: number): IBulletPoint => {
+  getPrevVisibleBulletPoint = (bulletPointId: string, index: number): IBulletPoint => {
     if (index === 0) {
       return this.treeHash[this.treeHash[bulletPointId].parentId]
     } else {
       const sameLevelPrevBulletPoint = this.getSameLevelPrevBulletPoint(bulletPointId, index)
-      return this.getBulletPointLastChild(sameLevelPrevBulletPoint.id)
+      return this.getBulletPointLastVisibleChild(sameLevelPrevBulletPoint.id)
     }
   }
 
@@ -66,10 +66,10 @@ export class Data {
 
   }
 
-  private getBulletPointLastChild = (bulletPointId: string): IBulletPoint => {
+  private getBulletPointLastVisibleChild = (bulletPointId: string): IBulletPoint => {
     const currentBulletPoint = this.treeHash[bulletPointId]
-    if (currentBulletPoint.children.length > 0) {
-      return this.getBulletPointLastChild(currentBulletPoint.children[currentBulletPoint.children.length - 1].id)
+    if (currentBulletPoint.children.length > 0 && currentBulletPoint.expand) {
+      return this.getBulletPointLastVisibleChild(currentBulletPoint.children[currentBulletPoint.children.length - 1].id)
     } else {
       return currentBulletPoint
     }

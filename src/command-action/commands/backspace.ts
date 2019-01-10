@@ -11,7 +11,7 @@ export const generateBackspaceAction = (
   const currentContentState = editorState.getCurrentContent()
   const [leftContentState, rightContentState] = splitContentState(editorState)
 
-  const cursorBulletPoint = store.data.getPrevBulletPoint(currentId, index)
+  const cursorBulletPoint = store.data.getPrevVisibleBulletPoint(currentId, index)
   const sameLevelPrevBulletPoint = store.data.getSameLevelPrevBulletPoint(currentId, index)
 
   const isCase1 = currentContentState.getPlainText().length === 0
