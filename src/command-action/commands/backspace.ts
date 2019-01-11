@@ -6,7 +6,7 @@ import cursorMange from '@root/tools/cursorManage'
 import { EditorState, ContentState } from 'draft-js'
 
 export const generateBackspaceAction = (
-  {currentId, editorState, index}: Partial<IActionBuildParams>) => {
+  {currentId, editorState, index, haveChildren}: Partial<IActionBuildParams>) => {
 
   const currentContentState = editorState.getCurrentContent()
   const [leftContentState, rightContentState] = splitContentState(editorState)
@@ -14,7 +14,7 @@ export const generateBackspaceAction = (
   const cursorBulletPoint = store.data.getPrevVisibleBulletPoint(currentId, index)
   const sameLevelPrevBulletPoint = store.data.getSameLevelPrevBulletPoint(currentId, index)
 
-  const isCase1 = currentContentState.getPlainText().length === 0
+  const isCase1 = currentContentState.getPlainText().length === 0 && !haveChildren
   const inCase3 = leftContentState.getPlainText().length === 0 &&
     rightContentState.getPlainText().length > 1 &&
     sameLevelPrevBulletPoint &&
