@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - run: yarn install
-      - run: yarn test:coverage
+      - run: yarn jest --coverage -w=2
       - persist_to_workspace:
           root: /tmp
           paths:
