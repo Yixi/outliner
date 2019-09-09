@@ -49,7 +49,7 @@ export const generateBackspaceAction = (
     })
 
     const content = ContentState.createFromText(
-      `${sameLevelPrevBulletPoint.content.getPlainText()}${rightContentState.getPlainText()}`,
+      `${sameLevelPrevBulletPoint.content.getPlainText()}${rightContentState.getPlainText()}`
     )
 
     return [

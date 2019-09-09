@@ -15,7 +15,7 @@ export default class OutlinerDocument extends React.Component<IProps> {
     return (
       <div>
         {this.props.data.tree.map(
-          (bulletPoint, index) => <BulletPoint key={bulletPoint.id} bulletPoint={bulletPoint} index={index}/>,
+          (bulletPoint, index) => <BulletPoint key={bulletPoint.id} bulletPoint={bulletPoint} index={index}/>
         )}
       </div>
     )

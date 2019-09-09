@@ -4,7 +4,7 @@ import store from '@root/store'
 import cursorMange from '@root/tools/cursorManage'
 
 export const generateUpAction = (
-  {currentId, index}: Partial<IActionBuildParams>,
+  {currentId, index}: Partial<IActionBuildParams>
 ) => {
 
   const cursorBulletPoint = store.data.getPrevVisibleBulletPoint(currentId, index)

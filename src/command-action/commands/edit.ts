@@ -2,7 +2,7 @@ import { ACTION_TYPE, actionLog } from '@root/command-action/actionLog'
 import { IActionBuildParams } from '@root/command-action/buildAction'
 
 export const generateEditAction = (
-  {editorState, currentId}: Partial<IActionBuildParams>,
+  {editorState, currentId}: Partial<IActionBuildParams>
 ) => {
 
   return [
@@ -11,7 +11,7 @@ export const generateEditAction = (
       {
         id: currentId,
         content: editorState.getCurrentContent(),
-      },
+      }
     ),
   ]
 }

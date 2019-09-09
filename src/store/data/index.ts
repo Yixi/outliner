@@ -69,7 +69,7 @@ export class Data {
         const theNonLastChildParentBulletPoint = this.getNonLastChildParentBulletPoint(currentBulletPoint.parentId)
         return this.getSameLevelNextBulletPoint(
           theNonLastChildParentBulletPoint.id,
-          this.getBulletPointInfoById(theNonLastChildParentBulletPoint.id)[1],
+          this.getBulletPointInfoById(theNonLastChildParentBulletPoint.id)[1]
         )
       }
     } else {

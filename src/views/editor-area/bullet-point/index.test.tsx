@@ -25,7 +25,7 @@ describe('test BulletPoint View', () => {
         ui={ui}
         bulletPoint={bulletPoint}
         index={0}
-      />,
+      />
     )
 
     expect(wrapper.find('.bullet-point-content').length).toEqual(1)

@@ -73,7 +73,7 @@ export default class Editor extends React.Component<IProps, IState> {
             this.state.editorState.getSelection().merge({
               anchorOffset: cursor.offset,
               focusOffset: cursor.offset,
-            }) as SelectionState,
+            }) as SelectionState
           ),
         })
       }

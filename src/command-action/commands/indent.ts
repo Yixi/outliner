@@ -25,7 +25,7 @@ export const generateIndentAction = ({currentId, parentId, index, editorState}: 
         {
           index,
           parentId,
-        },
+        }
       ),
     ]
   }

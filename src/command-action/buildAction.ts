@@ -15,5 +15,5 @@ export interface IActionBuildParams {
 }
 
 export const buildAction = (
-  buildParams: { command: COMMAND } & IActionBuildParams,
+  buildParams: { command: COMMAND } & IActionBuildParams
 ) => actionGenerate[buildParams.command]({...buildParams})

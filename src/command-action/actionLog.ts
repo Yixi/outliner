@@ -64,7 +64,7 @@ class Log {
   generateLog(
     type: ACTION_TYPE,
     currentData: IActionDataMeta,
-    prevData?: IActionDataMeta,
+    prevData?: IActionDataMeta
   ): IActionLog {
     const logCommand: { [key: string]: (currentData: IActionDataMeta, prevData?: IActionDataMeta) => IActionLog } = {
       [ACTION_TYPE.CREATE]: Log.generateCreateLog,
