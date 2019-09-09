@@ -1,0 +1,36 @@
+name: main workflow
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  test_deploy:
+    name: test and deploy Outliner
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: yarn install and test
+      run: |
+        yarn install
+        yarn jest --coverage -w=2
+    - name: SonarCloud Trigger
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: build project
+      run: |
+        yarn build
+    - name: deploy to github pages
+      uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: dist
