@@ -1,4 +1,4 @@
-name: main workflow
+name: Test and deploy
 
 on:
   push:
@@ -21,7 +21,8 @@ jobs:
         yarn install
         yarn jest --coverage -w=2
     - name: SonarCloud Trigger
-      uses: sonarsource/sonarcloud-github-action@master
+      run:|
+        yarn sonarqube
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
