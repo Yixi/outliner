@@ -24,7 +24,7 @@ describe('test indent command', () => {
 
     const fn = store.data.getSameLevelPrevBulletPoint as any
 
-    fn.mockReturnValue({id: '1', children: []})
+    fn.mockReturnValue({id: '1', children: [], expand: true})
 
     const mockEditorState = EditorState.createWithContent(mockContentState)
     const action = generateIndentAction({

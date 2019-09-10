@@ -100,9 +100,12 @@ export default class BulletPoint extends React.Component<IProps> {
             onCommandEvent={this.handleContentEditorCommand}
           />
         </div>
-        <div className="bullet-point-children">
-          {bulletPoint.expand && bulletPoint.children.map(this.renderChild)}
-        </div>
+        {
+          bulletPoint.expand &&
+          <div className="bullet-point-children">
+            {bulletPoint.children.map(this.renderChild)}
+          </div>
+        }
       </div>
     )
   }

@@ -25,6 +25,11 @@
     "sonarqube": "sonar-scanner -Dsonar.login=$SONAR_TOKEN",
     "coverage:report": "cat ./coverage/lcov.info | COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN coveralls"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test"
+    }
+  },
   "devDependencies": {
     "@types/classnames": "^2.2.9",
     "@types/draft-js": "^0.10.35",
@@ -44,6 +49,7 @@
     "fork-ts-checker-webpack-plugin": "^1.5.0",
     "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.5",
     "jest": "^24.9.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
