@@ -7,7 +7,7 @@ export const generateIndentAction = ({currentId, parentId, index, editorState}: 
 
   const prevBulletPoint = store.data.getSameLevelPrevBulletPoint(currentId, index)
 
-  if (prevBulletPoint) {
+  if (prevBulletPoint && prevBulletPoint.expand) {
 
     cursorMange.setNextCursor({
       editorId: currentId,

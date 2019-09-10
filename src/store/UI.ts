@@ -9,8 +9,8 @@ export class UI {
   }
 
   @action initDebugConfig = (config: {debugMode?: boolean, showBulletPointId?: boolean}) => {
-    this.debugMode = config.debugMode
-    this.showBulletPointId = config.showBulletPointId
+    this.debugMode = config.debugMode || false
+    this.showBulletPointId = config.showBulletPointId || false
   }
 }
 

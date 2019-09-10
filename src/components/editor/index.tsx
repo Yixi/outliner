@@ -106,7 +106,13 @@ export default class Editor extends React.Component<IProps, IState> {
 
     console.info('Handle command', command)
 
-    if ([COMMAND.OUTDENT, COMMAND.INDENT].includes(command)) {
+    const needSyncContentCommands = [
+      COMMAND.OUTDENT,
+      COMMAND.INDENT,
+      COMMAND.ADD,
+    ]
+
+    if (needSyncContentCommands.includes(command)) {
       this.forceSyncContent()
     }
 
