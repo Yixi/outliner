@@ -106,6 +106,10 @@ export default class Editor extends React.Component<IProps, IState> {
 
     console.info('Handle command', command)
 
+    if ([COMMAND.OUTDENT, COMMAND.INDENT].includes(command)) {
+      this.forceSyncContent()
+    }
+
     if (command.toString() === DRAFT_JS_COMMAND.BACKSPACE) {
       const [leftContentState] = splitContentState(editorState)
       if (leftContentState.getPlainText().length === 0) {
@@ -121,27 +125,6 @@ export default class Editor extends React.Component<IProps, IState> {
     return DRAFT_HANDLE_VALUE.NOT_HANDLE
   }
 
-  handleTab = (event: React.KeyboardEvent) => {
-    event.preventDefault()
-    this.forceSyncContent()
-
-    if (event.shiftKey) {
-      this.props.onCommandEvent(COMMAND.OUTDENT, this.state.editorState)
-    } else {
-      this.props.onCommandEvent(COMMAND.INDENT, this.state.editorState)
-    }
-  }
-
-  handleUpArrow = (event: React.KeyboardEvent) => {
-    event.preventDefault()
-    this.props.onCommandEvent(COMMAND.UP, this.state.editorState)
-  }
-
-  handleDownArrow = (event: React.KeyboardEvent) => {
-    event.preventDefault()
-    this.props.onCommandEvent(COMMAND.DOWN, this.state.editorState)
-  }
-
   render() {
     return (
       <div>
@@ -152,9 +135,6 @@ export default class Editor extends React.Component<IProps, IState> {
           handleKeyCommand={this.handleKeyCommand}
           keyBindingFn={keyBinding}
           ref={this.setEditorRef}
-          onTab={this.handleTab}
-          onUpArrow={this.handleUpArrow}
-          onDownArrow={this.handleDownArrow}
         />
       </div>
     )

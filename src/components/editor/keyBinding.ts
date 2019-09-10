@@ -9,9 +9,20 @@ export enum DRAFT_HANDLE_VALUE {
 }
 
 export const keyBinding: (event: React.KeyboardEvent) => string = (event) => {
-  if (event.keyCode === KEY_CODE.ENTER) {
-    return COMMAND.ADD
+  switch (event.keyCode) {
+    case KEY_CODE.ENTER:
+      return COMMAND.ADD
+    case KEY_CODE.TAB:
+      if (event.shiftKey) {
+        return COMMAND.OUTDENT
+      } else {
+        return COMMAND.INDENT
+      }
+    case KEY_CODE.UP:
+      return COMMAND.UP
+    case KEY_CODE.DOWN:
+      return COMMAND.DOWN
+    default:
+      return getDefaultKeyBinding(event)
   }
-
-  return getDefaultKeyBinding(event)
 }
