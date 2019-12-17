@@ -1,5 +1,7 @@
 module.exports = {
-  plugins: [
-    require("autoprefixer")()
-  ]
-};
+  parser: 'postcss',
+  plugins: {
+    autoprefixer: {
+    }
+  }
+}
