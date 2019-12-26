@@ -3,7 +3,6 @@ import OutlinerDocument from '@root/views/editor-area/outlinerDocument'
 import { Data, IBulletPoint } from '@root/store/data'
 import { inject } from 'mobx-react'
 import './index.less'
-import { ContentState, convertFromHTML, EditorState } from 'draft-js'
 import storageLocal from '@root/storage/local'
 
 interface IProps {
