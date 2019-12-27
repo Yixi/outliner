@@ -28,6 +28,13 @@ httpRequest.interceptors.request.use((config) => {
   return config
 })
 
+export interface IPagedResource<T> {
+  pageSize: number,
+  pageIndex: number,
+  totalCount: number,
+  resource: T[]
+}
+
 export default function useRequest<Data = unknown, Error = unknown>(
   request: GetRequest,
   {initialData, ...config}: IConfig<Data, Error> = {}
