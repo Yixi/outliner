@@ -2,10 +2,13 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
+const fs = require('fs')
 
 const PORT = 4222;
 const HOST = 'http://localhost';
 const URL = `${HOST}:${PORT}`;
+
+const config = fs.readFileSync(path.join(__dirname, '../config/config-local.js'), 'utf-8')
 
 module.exports = {
   mode: 'development',
@@ -72,6 +75,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "../src/app.html",
       filename: "index.html",
+      config: `<script>${config}</script>`
     }),
     new webpack.HotModuleReplacementPlugin(),
 

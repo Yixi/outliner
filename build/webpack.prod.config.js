@@ -85,6 +85,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "../src/app.html",
       filename: "index.html",
+      config: '<script src="config.js"></script>'
     }),
     new MiniCssExtractPlugin({
       filename: "[name].[hash:7].css",

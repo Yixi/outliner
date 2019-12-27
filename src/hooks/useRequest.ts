@@ -1,6 +1,7 @@
 import useSWR, { ConfigInterface, responseInterface } from 'swr'
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
 import Auth from '@root/tools/auth/auth'
+import getConfig from '@root/tools/getConfig'
 
 export type GetRequest = AxiosRequestConfig | null
 
@@ -19,7 +20,7 @@ export interface IConfig<Data = unknown, Error = unknown>
 
 export const httpRequest = axios.create({
   timeout: 10 * 1000,
-  baseURL: 'http://localhost:8089/api',
+  baseURL: getConfig().api,
 })
 
 httpRequest.interceptors.request.use((config) => {
