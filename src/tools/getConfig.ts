@@ -1,5 +1,5 @@
 interface IGlobalConfig {
-  api: string
+  api?: string
 }
 
 declare global {
@@ -10,5 +10,5 @@ declare global {
 }
 
 export default function getConfig() {
-  return window.CONFIG || {}
+  return window.CONFIG || {api: ''}
 }
